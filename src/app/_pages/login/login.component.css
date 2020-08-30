@@ -1,0 +1,52 @@
+:host{
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.mat-form-field{
+    width: 100%;
+    min-width: 300px;
+}
+
+.mat-card-title{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    width: 100%;
+    background-color: #228B22;
+}
+
+a{
+    text-align: center;
+}
+
+footer { text-align: center; }
+
+footer p {
+	color: #888;
+	font-size: 13px;
+	letter-spacing: .4px;
+}
+
+footer a {
+	color: #4a89dc;
+	text-decoration: none;
+	transition: all .2s ease;
+}
+
+footer a:hover {
+	color: #666;
+	text-decoration: underline;
+}
+
+footer img {
+	width: 100px;
+	transition: all .2s ease;
+}
+
+footer img:hover { opacity: .83; }
+
+footer img:focus , footer a:focus { outline: none; }

@@ -1,0 +1,29 @@
+.estilo-contenedor {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.boton:hover {
+    background: #228B22;
+    color: #fff !important;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: normal;
+    font-size: 20px;
+    font-family: Arial;
+}
+
+._sidenav-container {
+    flex: 1;
+}
+
+._spacer {
+    flex: 1 1 auto;
+}

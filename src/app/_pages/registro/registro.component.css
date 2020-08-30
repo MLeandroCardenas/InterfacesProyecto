@@ -1,0 +1,21 @@
+
+:host{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.mat-form-field{
+    width: 100%;
+    min-width: 300px;
+}
+
+.mat-card-title{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+    width: 45%;
+    background-color: #228B22;
+}

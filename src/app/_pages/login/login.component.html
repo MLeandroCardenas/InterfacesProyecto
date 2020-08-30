@@ -1,0 +1,28 @@
+<mat-card>
+    <mat-card-title>Inicio de Sesión</mat-card-title>
+        <form class="example-form"  [formGroup]="formLogin">
+            <div class="form-f-login">
+                <mat-form-field class="example-full-width"> 
+                    <input matInput placeholder="Correo" type="email" maxlength="200" required formControlName="correo">
+                </mat-form-field>
+                </div>
+                
+                <div class="form-input-login">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Contraseña" minlength="6" maxlength="12" type="password" required formControlName="clave">
+                    </mat-form-field>
+                </div>
+    
+            <div class="form-input-login">
+                <button mat-raised-button type="submit" class="boton">
+                    <span>Ingresar</span>
+                </button>
+            </div>
+            <br>
+            <a mat-button (click) = "dialogoRecuperacion()">Olvidé mi contraseña</a>
+            <a mat-stroked-button routerLink="/registro">Regístrate aquí</a>
+        </form>
+        <br>
+        <footer><img src="assets/img/logoInicio.png"></footer>
+</mat-card>
+<router-outlet></router-outlet>
