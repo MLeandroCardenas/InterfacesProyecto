@@ -3,51 +3,112 @@
     <mat-divider></mat-divider>
     <br>
         <form class="example-form"  [formGroup]="formRegistro" (ngSubmit)="registro()">
-            
+
             <div>
                 <mat-form-field class="example-full-width"> 
-                    <input matInput placeholder="Apellidos" type="text" minlength="3" maxlength="60" required formControlName="apellidos">
+                    <input matInput placeholder="Apellidos" type="text" required minlength="3" maxlength="30" formControlName="apellidos">
                 </mat-form-field>
+                <div class="alert-danger" *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)">
+                    <div class="container-error-message" *ngIf="apellidos.errors.required">
+                        Apellidos requeridos
+                    </div>
+                    <div class="container-error-message" *ngIf="apellidos.errors.minlength">
+                        Mínimo 3 caracteres
+                    </div>
+                    <div class="container-error-message" *ngIf="apellidos.errors.pattern">
+                        Debe ingresar letras mayúsculas
+                    </div>
+                </div>
             </div>
             
             <div>
                 <mat-form-field class="example-full-width"> 
-                    <input matInput placeholder="Nombres" type="text" minlength="3" maxlength="60" required formControlName="nombres">
+                    <input matInput placeholder="Nombres" type="text" required minlength="3" maxlength="30" formControlName="nombres">
                 </mat-form-field>
+                <div class="alert-danger" *ngIf="nombres.invalid && (nombres.dirty || nombres.touched)">
+                    <div class="container-error-message" *ngIf="nombres.errors.required">
+                        Nombres requeridos
+                    </div>
+                    <div class="container-error-message" *ngIf="nombres.errors.minlength">
+                        Mínimo 3 caracteres
+                    </div>
+                    <div class="container-error-message" *ngIf="nombres.errors.pattern">
+                        Debe ingresar letras mayúsculas
+                    </div>
+                </div>
             </div>
             
             <div>
                 <mat-form-field class="example-full-width"> 
-                    <input matInput placeholder="Correo institucional" type="email"  maxlength="200" required formControlName="correo">
+                    <input matInput placeholder="Correo institucional" type="email" required minlength="5" maxlength="200" formControlName="correo">
                 </mat-form-field>
+                <div class="alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+                    <div class="container-error-message" *ngIf="correo.errors.required">
+                        Correo requerido
+                    </div>
+                    <div class="container-error-message" *ngIf="correo.errors.minlength">
+                        Mínimo 5 caracteres
+                    </div>
+                    <div class="container-error-message" *ngIf="correo.invalid">
+                        Correo inválido
+                    </div>
+                    <div class="container-error-message" *ngIf="correo.errors.validarServidorCorreo">
+                        Debe ser un correo institucional válido
+                    </div>
+                    <div class="container-error-message" *ngIf="correo.errors.ValidacionCorreoAsincrona">
+                        Este correo ya esta registrado
+                    </div>
+                </div>
             </div>            
             
             <div>
                 <mat-form-field class="example-full-width"> 
-                    <input matInput placeholder="Número de documento" type="text" minlength="5" maxlength="15" required formControlName="identificacion">
+                    <input matInput placeholder="Número de documento" type="text" required minlength="4" maxlength="15" formControlName="identificacion">
                 </mat-form-field>
+                <div class="alert-danger" *ngIf="identificacion.invalid && (identificacion.dirty || identificacion.touched)">
+                    <div class="container-error-message" *ngIf="identificacion.errors.required">
+                        Identificación requerida
+                    </div>
+                    <div class="container-error-message" *ngIf="identificacion.errors.minlength">
+                        Mínimo 5 caracteres
+                    </div>
+                    <div class="container-error-message" *ngIf="identificacion.errors.pattern">
+                        Ingrese solo números sin espacios
+                    </div>
+                </div>
             </div>
             
             <div>
                 <mat-form-field class="example-full-width"> 
-                    <input matInput placeholder="Contraseña" type="password" minlength="6" maxlength="12" required formControlName="clave">
+                    <input matInput placeholder="Contraseña" type="password" required minlength="6" maxlength="12" formControlName="clave">
                 </mat-form-field>
+                <div class="alert-danger" *ngIf="clave.invalid && (clave.dirty || clave.touched)">
+                    <div class="container-error-message" *ngIf="clave.errors.required">
+                        Contraseña requerida
+                    </div>
+                    <div class="container-error-message" *ngIf="clave.errors.minlength">
+                        Mínimo 6 caracteres
+                    </div>
+                    <div class="container-error-message" *ngIf="clave.errors.validarClave">
+                       {{clave.errors.validarClave.message}}
+                    </div>
+                </div>
             </div>
             
-            <div>
-                <mat-form-field class="example-full-width"> 
-                    <input matInput placeholder="Confirmar contraseña" type="password" minlength="6" maxlength="12" required formControlName="repetirClave">
-                </mat-form-field>    
-            </div>
-
             <mat-form-field>
                 <mat-label>Seleccione su rol</mat-label>
-                    <mat-select formControlName="rol">
+                    <mat-select formControlName="rol" required>
                         <mat-option *ngFor="let rol of this.rolesApp" [value]="rol.idRol">
                             {{rol.nombre}}
                         </mat-option>
                     </mat-select>
             </mat-form-field>
+
+            <div class="alert-danger" *ngIf="rol.invalid && (rol.dirty || rol.touched)">
+                <div class="container-error-message" *ngIf="rol.errors.required">
+                    Rol universitario requerido
+                </div>
+            </div>   
 
             <div>
                 <button mat-raised-button type="submit" style="background-color: #228B22; color: #000;">

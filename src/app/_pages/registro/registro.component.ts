@@ -1,8 +1,11 @@
+import { ValidacionCorreoAsincronaDirective } from './../../_validaciones/validacion-correo-asincrona.directive';
+import { ValidacionesCorreo } from './../../_validaciones/validaciones-correo';
 import { Usuario } from './../../_model/Usuario';
 import { AutenticacionService } from './../../_services/autenticacion.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ValidacionesClaves } from 'src/app/_validaciones/validaciones-claves';
 
 export interface Roles {
   nombre: string;
@@ -16,61 +19,68 @@ export interface Roles {
 })
 export class RegistroComponent implements OnInit {
 
+
   constructor(
         private formBuilder: FormBuilder,
         private servicio: AutenticacionService,
+        private validarCorreoUnico: ValidacionCorreoAsincronaDirective,
         private mensaje: MatSnackBar
-      ) { }
-       
+      ) {}
+
   formRegistro: FormGroup;
-  formatoCorreo: any = '';
-  formatoDocumento: any = '';
+  formatoDocumento: any = '[0-9]*';
+  soloLetras: any = '[A-Z ]*';
   rolesApp: Roles[];
+  resultado: any;
 
   iniciarFormuario() {
     this.formRegistro = this.formBuilder.group({
+
       apellidos: ['',
-      [
-        Validators.required,
+      [Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(60)]
+        Validators.maxLength(30),
+        Validators.pattern(this.soloLetras)]
       ],
+
       nombres: ['',
-      [
-        Validators.required,
+      [Validators.required,
         Validators.minLength(3),
-        Validators.maxLength(60)]
+        Validators.maxLength(30),
+        Validators.pattern(this.soloLetras)]
       ],
-      correo: ['',
-      [
-        Validators.required,
-        Validators.maxLength(200),
-        Validators.pattern(this.formatoCorreo)]
-      ],
-      identificacion: ['',
-      [
-        Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(15),
-        Validators.pattern(this.formatoDocumento)]],
-      clave: ['',
-      [
-        Validators.required,
-        Validators.minLength(6),
-        Validators.maxLength(12)]
-      ],
-      repetirClave: ['',
-      [
-        Validators.required, 
-        Validators.minLength(6),
-        Validators.maxLength(12)]
-      ],
-      rol: ['', Validators.required],
+
+      correo: ['', {
+          validators: [Validators.required,
+            Validators.email,
+            Validators.minLength(5),
+            Validators.maxLength(200),
+            ValidacionesCorreo.validarServidorCorreo],
+
+          asyncValidators: [this.validarCorreoUnico.validate.bind(this.validarCorreoUnico)],
+          updateOn: 'blur'
+        }],
+
+        identificacion: ['', {
+          validators: [Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(15),
+            Validators.pattern(this.formatoDocumento)]
+        }],
+
+      clave: ['', [Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(12),
+          ValidacionesClaves.validarClave]
+        ],
+
+        rol: ['', Validators.required],
     });
   }
 
   ngOnInit() {
     this.iniciarFormuario();
+    // tslint:disable-next-line: label-position
     roles: this.rolesApp = [
       {idRol: 4, nombre: 'Estudiante'},
       {idRol: 3, nombre: 'Docente'},
@@ -85,30 +95,57 @@ export class RegistroComponent implements OnInit {
       correo: '',
       identificacion: '',
       clave: '',
-      repetirClave: '',
       rol: ''
     });
   }
 
-  mostrarMensaje(men: string, action: string){
+  mostrarMensaje(men: string, action: string) {
     this.mensaje.open(men, action, {
       duration: 3000,
     });
   }
 
   registro() {
-    let usuario = new Usuario();
-    usuario.apellidos = this.formRegistro.get('apellidos').value;
-    usuario.nombres = this.formRegistro.get('nombres').value;
-    usuario.email = this.formRegistro.get('correo').value;
-    usuario.identificacion = this.formRegistro.get('identificacion').value;
-    usuario.password = this.formRegistro.get('clave').value;
-    usuario.confirm_password = this.formRegistro.get('repetirClave').value;
-    usuario.id_rol = this.formRegistro.get('rol').value;
-    usuario.estado = 1;
-    this.servicio.registroUsuarios(usuario).subscribe(() => {
-    });
-    this.mostrarMensaje('Registrado correctamente', 'Registro');
-    this.refrescar();
+      // tslint:disable-next-line: prefer-const
+      let usuario = new Usuario();
+      usuario.apellidos = this.formRegistro.get('apellidos').value;
+      usuario.nombres = this.formRegistro.get('nombres').value;
+      usuario.username = this.formRegistro.get('correo').value;
+      usuario.identificacion = this.formRegistro.get('identificacion').value;
+      usuario.password = this.formRegistro.get('clave').value;
+      usuario.id_rol = this.formRegistro.get('rol').value;
+      usuario.estado = 1;
+      if (this.formRegistro.valid) {
+        this.servicio.registroUsuarios(usuario).subscribe(() => {
+        });
+        this.mostrarMensaje('Registrado correctamente', 'Registro');
+        this.refrescar();
+      } else {
+        this.mostrarMensaje('Debe rellenar todos los campos', 'Advertencia');
+      }
+  }
+
+  get apellidos() {
+    return this.formRegistro.get('apellidos');
+  }
+
+  get nombres() {
+    return this.formRegistro.get('nombres');
+  }
+
+  get correo() {
+    return this.formRegistro.get('correo');
+  }
+
+  get identificacion() {
+    return this.formRegistro.get('identificacion');
+  }
+
+  get clave() {
+    return this.formRegistro.get('clave');
+  }
+
+  get rol() {
+    return this.formRegistro.get('rol');
   }
 }

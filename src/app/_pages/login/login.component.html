@@ -1,16 +1,41 @@
 <mat-card>
     <mat-card-title>Inicio de Sesión</mat-card-title>
-        <form class="example-form"  [formGroup]="formLogin">
+        <form class="example-form"  [formGroup]="formLogin" (ngSubmit)="login()">
             <div class="form-f-login">
                 <mat-form-field class="example-full-width"> 
-                    <input matInput placeholder="Correo" type="email" maxlength="200" required formControlName="correo">
+                    <input matInput placeholder="Correo" type="email" required minlength="5" maxlength="200" formControlName="correo">
                 </mat-form-field>
+                <div class="alert-danger" *ngIf="correo.invalid && (correo.dirty || correo.touched)">
+                    <div class="container-error-message" *ngIf="correo.errors.required">
+                        Correo requerido
+                    </div>
+                    <div class="container-error-message" *ngIf="correo.errors.minlength">
+                        Mínimo 5 caracteres
+                    </div>
+                    <div class="container-error-message" *ngIf="correo.invalid">
+                        Correo inválido
+                    </div>
+                    <div class="container-error-message" *ngIf="correo.errors.validarServidorCorreo">
+                        Debe ser un correo institucional válido.
+                    </div>
+                    <div class="container-error-message" *ngIf="correo.errors.ValidacionCorreoAsincrona">
+                        Este correo ya esta registrado
+                    </div>
+                </div>
                 </div>
                 
                 <div class="form-input-login">
                     <mat-form-field class="example-full-width">
-                        <input matInput placeholder="Contraseña" minlength="6" maxlength="12" type="password" required formControlName="clave">
+                        <input matInput placeholder="Contraseña" type="password" required minlength="6" maxlength="12" formControlName="clave">
                     </mat-form-field>
+                    <div class="alert-danger" *ngIf="clave.invalid && (clave.dirty || clave.touched)">
+                        <div class="container-error-message" *ngIf="clave.errors.required">
+                            Contraseña requerida
+                        </div>
+                        <div class="container-error-message" *ngIf="clave.errors.minlength">
+                            Mínimo 6 caracteres
+                        </div>
+                    </div>
                 </div>
     
             <div class="form-input-login">

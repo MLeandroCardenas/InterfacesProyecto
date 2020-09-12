@@ -1,4 +1,5 @@
-import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptorService } from './_compartido/auth-interceptor.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './_material/material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -11,7 +12,10 @@ import { EventosPublicosComponent } from './_pages/eventos-publicos/eventos-publ
 import { ReactiveFormsModule } from '@angular/forms';
 import { VistaDialogoRecuperacionComponent } from './_pages/vista-dialogo-recuperacion/vista-dialogo-recuperacion.component';
 import { SolicitudRecuperacionComponent } from './_pages/solicitud-recuperacion/solicitud-recuperacion.component';
-import { MenuAdminComponent } from './_pages/menu-admin/menu-admin.component';
+import { MenuPrincipalComponent } from './_pages/menu-principal/menu-principal.component';
+import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
+import { ValidacionCorreoAsincronaDirective } from './_validaciones/validacion-correo-asincrona.directive';
+import { Not404Component } from './_pages/not404/not404.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,10 @@ import { MenuAdminComponent } from './_pages/menu-admin/menu-admin.component';
     EventosPublicosComponent,
     VistaDialogoRecuperacionComponent,
     SolicitudRecuperacionComponent,
-    MenuAdminComponent
+    MenuPrincipalComponent,
+    MenuFuncionalidadesComponent,
+    ValidacionCorreoAsincronaDirective,
+    Not404Component,
   ],
   entryComponents: [
     VistaDialogoRecuperacionComponent
@@ -32,9 +39,13 @@ import { MenuAdminComponent } from './_pages/menu-admin/menu-admin.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

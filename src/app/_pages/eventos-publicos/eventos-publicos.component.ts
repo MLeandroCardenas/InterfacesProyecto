@@ -1,4 +1,3 @@
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Eventos } from './../../_model/Eventos';
 import { EventosService } from './../../_services/eventos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -27,11 +26,16 @@ export class EventosPublicosComponent implements OnInit {
 
   listarInfo() {
     this.servicio.listar().subscribe( data => {
-        this.dataSource = new MatTableDataSource(data['zonas']);
+      try {
+        this.dataSource = new MatTableDataSource(data);
         this.dataSource = new MatTableDataSource();
         console.log(data);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
+      } catch (error) {
+        console.log('mensaje de error: ' + error.message);
+        console.log('nombre del error: ' + error.name);
+      }
       });
   }
 

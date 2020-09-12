@@ -5,8 +5,7 @@ export class Usuario {
     identificacion: number;
     estado: number;
     id_rol: number;
-    email: string;
+    username: string;
     password: string;
-    confirm_password: string;
     foto: string;
 }

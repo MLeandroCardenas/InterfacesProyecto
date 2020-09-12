@@ -1,0 +1,27 @@
+<div class="example-container">
+    <div class="estilo-contenedor">
+        <mat-toolbar style="background: #228B22;" class="example-toolbar">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <h1 class="app-name">SICAC UDEC</h1>
+            </button>
+              <mat-menu #menu="matMenu">
+                <!--Todos los roles-->
+                <button mat-menu-item routerLink="/login" class="boton">
+                  <mat-icon>login</mat-icon>
+                  <span>Iniciar sesión</span>
+                </button>
+                <!--Todos los roles-->
+                <button mat-menu-item routerLink="/registro" class="boton">
+                  <mat-icon>account_box</mat-icon>
+                  <span>Registrarse</span>
+                </button>
+                <!--Todos los roles-->
+                <button mat-menu-item routerLink="/publicos" class="boton">
+                  <mat-icon>event</mat-icon>
+                  <span>Eventos</span>
+                </button>
+              </mat-menu>              
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+    </div>
+</div>

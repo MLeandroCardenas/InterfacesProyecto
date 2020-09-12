@@ -1,4 +1,6 @@
-import { MenuAdminComponent } from './_pages/menu-admin/menu-admin.component';
+import { Not404Component } from './_pages/not404/not404.component';
+import { CanActivateGuard } from './_guardas/can-activate.guard';
+import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
 import { SolicitudRecuperacionComponent } from './_pages/solicitud-recuperacion/solicitud-recuperacion.component';
 import { EventosPublicosComponent } from './_pages/eventos-publicos/eventos-publicos.component';
 import { RegistroComponent } from './_pages/registro/registro.component';
@@ -6,13 +8,15 @@ import { LoginComponent } from './_pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'login'},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'registro', component: RegistroComponent},
   {path: 'publicos', component: EventosPublicosComponent},
-  {path: 'reestablecer', component: SolicitudRecuperacionComponent}
+  {path: 'reestablecer', component: SolicitudRecuperacionComponent},
+  {path: 'funcionalidad', component: MenuFuncionalidadesComponent, canActivate: [CanActivateGuard]},
+  {path: 'not404', component: Not404Component},
+  {path: '**', redirectTo: 'not404', pathMatch: 'full'}
 ];
 
 @NgModule({
