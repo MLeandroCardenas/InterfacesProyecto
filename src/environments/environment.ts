@@ -6,8 +6,7 @@ export const environment = {
   production: false,
   HOST: 'http://127.0.0.1:8000/api/',
   AUTH: 'http://127.0.0.1:8000/oauth/token',
-  LLAVE_TOKEN: 'token',
-  LLAVE_REFRESH_TOKEN: 'refresh_token'
+  NOMBREAPP: 'SICAC UDEC'
 };
 
 /*

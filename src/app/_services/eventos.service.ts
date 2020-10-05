@@ -1,4 +1,3 @@
-import { Eventos } from './../_model/Eventos';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -13,7 +12,8 @@ export class EventosService {
 
   constructor(private http: HttpClient) { }
 
-  listar() {
-    return this.http.get<Eventos[]>(`${this.url}/publicos`);
+  listarPublicos(page: number, size: number) {
+    return this.http.get<any>(`${this.url}/publicos?page=${page}&size=${size}`);
   }
+
 }

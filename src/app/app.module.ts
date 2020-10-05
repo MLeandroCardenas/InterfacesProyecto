@@ -16,6 +16,8 @@ import { MenuPrincipalComponent } from './_pages/menu-principal/menu-principal.c
 import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
 import { ValidacionCorreoAsincronaDirective } from './_validaciones/validacion-correo-asincrona.directive';
 import { Not404Component } from './_pages/not404/not404.component';
+import { ZonasComponent } from './_pages/zonas/zonas.component';
+import { LectoresComponent } from './_pages/lectores/lectores.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { Not404Component } from './_pages/not404/not404.component';
     MenuFuncionalidadesComponent,
     ValidacionCorreoAsincronaDirective,
     Not404Component,
+    ZonasComponent,
+    LectoresComponent,
   ],
   entryComponents: [
     VistaDialogoRecuperacionComponent

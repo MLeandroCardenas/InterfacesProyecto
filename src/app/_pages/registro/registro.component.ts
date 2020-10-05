@@ -80,7 +80,6 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit() {
     this.iniciarFormuario();
-    // tslint:disable-next-line: label-position
     roles: this.rolesApp = [
       {idRol: 4, nombre: 'Estudiante'},
       {idRol: 3, nombre: 'Docente'},

@@ -1,0 +1,113 @@
+<mat-tab-group>
+    <mat-tab label="Zonas" routerLink="/funcionalidad/zonas">
+        <div class="example-header">
+
+            <div [hidden]="isVisible">
+
+                <mat-form-field>
+                    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Zona">
+                </mat-form-field>
+
+                <mat-table [dataSource]="dataSource" matSort>
+
+                    <div [hidden]="true">
+                        <ng-container matColumnDef="id">
+                            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                        </ng-container>
+                    </div>
+
+                    <ng-container matColumnDef="Nombre">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.nombre_zona}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Estado">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+                        <mat-cell *matCellDef="let element"> {{element.estado}} </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="acciones">
+                        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+
+                            <div *ngIf="row.estado === 'DESHABILITADO'">
+                                <button mat-button color="primary" (click)="habilitarZona(row.id)" matTooltip="Habilitar">
+                                    <mat-icon>check</mat-icon>
+                                </button>
+                            </div>
+        
+                            <div *ngIf="row.estado === 'HABILITADO'">
+                                <button mat-button color="primary" (click)="deshabilitarZona(row.id)" matTooltip="Deshabilitar">
+                                    <mat-icon>cancel</mat-icon>
+                                </button>
+                            </div>  
+                 
+                            <button mat-button color="accent" matTooltip="Editar" (click)="obtenerZona(row.id)">
+                                <mat-icon>edit</mat-icon>
+                            </button>
+                            
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                </mat-table>
+
+                <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+                <br />
+                <button mat-fab color="accent" type="button" (click)="showForm()" style="float: right">
+                    <mat-icon>create</mat-icon>
+                </button>
+            </div>
+
+            <div [hidden]="!isVisible">
+                <mat-card>Ingrese los datos de la zona</mat-card>
+                <form class="example-container" [formGroup]="formZonas" (ngSubmit)="operar()">
+
+                    <div [hidden]="true">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="ID" required formControlName="id">
+                        </mat-form-field>
+                    </div>
+
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Nombre zona" minlength="3" maxlength="50" required
+                            formControlName="nombreZona">
+                    </mat-form-field>
+                    <div class="alert-danger" *ngIf="zona.invalid && (zona.dirty || zona.touched)">
+                        <div class="container-error-message" *ngIf="zona.errors.required">
+                            Nombre de la zona es requerida
+                        </div>
+                        <div class="container-error-message" *ngIf="zona.errors.minlength">
+                            Mínimo 3 caracteres
+                        </div>
+                    </div>
+                    <div *ngIf='isSaving === true'>
+                        <mat-form-field>
+                            <mat-label>Lectores disponibles</mat-label>
+                                <mat-select formControlName="disponibles">
+                                    <mat-option *ngFor='let lector of this.arrayLectores' [value]='lector.id'>
+                                        {{lector.nombre_modulo}}
+                                    </mat-option>
+                                </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button color="primary" type="submit">
+                        <mat-icon>done</mat-icon>
+                        <span>Aceptar</span>
+                    </button>
+                    <button mat-raised-button color="accent" type="button" (click)="hideForm()">
+                        <mat-icon>close</mat-icon>
+                        <span>Cancelar</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </mat-tab>
+    <mat-tab label="Lectores">
+        <app-lectores></app-lectores>
+    </mat-tab>
+    <mat-tab label="Estadística">Gráficas estadisticas</mat-tab>
+</mat-tab-group>

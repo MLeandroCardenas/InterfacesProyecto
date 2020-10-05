@@ -39,7 +39,7 @@
                 </div>
     
             <div class="form-input-login">
-                <button mat-raised-button type="submit" class="boton">
+                <button mat-raised-button type="submit" class="boton" [disabled]='!formLogin.valid'>
                     <span>Ingresar</span>
                 </button>
             </div>

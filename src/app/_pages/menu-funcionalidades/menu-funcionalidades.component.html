@@ -6,7 +6,7 @@
       <mat-icon *ngIf="sidenav.opened">close</mat-icon>
     </button>
 
-    <h1 class="example-app-name">SICAC UDEC</h1>
+    <h1 class="example-app-name">{{titulo}}</h1>
     <span class="example-spacer"></span>
 
     <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -73,7 +73,7 @@
 
       <div *ngIf="rolUsuario === 1">
         <!--administrador-->
-        <button mat-menu-item style="cursor: pointer" routerLink="" (click)="sidenav.opened = false">
+        <button mat-menu-item style="cursor: pointer" routerLink="/funcionalidad/zonas" (click)="sidenav.opened = false">
           <mat-icon>build</mat-icon>
           <span>Zonas</span>
         </button>

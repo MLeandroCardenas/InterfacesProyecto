@@ -1,3 +1,5 @@
+import { LectoresComponent } from './_pages/lectores/lectores.component';
+import { ZonasComponent } from './_pages/zonas/zonas.component';
 import { Not404Component } from './_pages/not404/not404.component';
 import { CanActivateGuard } from './_guardas/can-activate.guard';
 import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
@@ -14,7 +16,11 @@ const routes: Routes = [
   {path: 'registro', component: RegistroComponent},
   {path: 'publicos', component: EventosPublicosComponent},
   {path: 'reestablecer', component: SolicitudRecuperacionComponent},
-  {path: 'funcionalidad', component: MenuFuncionalidadesComponent, canActivate: [CanActivateGuard]},
+  {path: 'funcionalidad', component: MenuFuncionalidadesComponent, canActivate: [CanActivateGuard], canActivateChild: [CanActivateGuard],
+  children: [
+    {path: 'zonas', component: ZonasComponent},
+    {path: 'lectores', component: LectoresComponent}
+  ]},
   {path: 'not404', component: Not404Component},
   {path: '**', redirectTo: 'not404', pathMatch: 'full'}
 ];

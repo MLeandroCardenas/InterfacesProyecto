@@ -13,8 +13,10 @@ import { MatSort } from '@angular/material/sort';
 
 export class EventosPublicosComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', /*'nombre', 'descripcion', 'zona', 'fecha'*/'acciones'];
+  displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'zona', 'fecha', 'acciones'];
   dataSource = new MatTableDataSource<Eventos>();
+  cantidad: number = 0;
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static : true}) sort: MatSort;
 
@@ -24,22 +26,24 @@ export class EventosPublicosComponent implements OnInit {
 
   constructor(private servicio: EventosService) { }
 
-  listarInfo() {
-    this.servicio.listar().subscribe( data => {
-      try {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource = new MatTableDataSource();
-        console.log(data);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      } catch (error) {
-        console.log('mensaje de error: ' + error.message);
-        console.log('nombre del error: ' + error.name);
-      }
-      });
+  ngOnInit() {
+    this.listarInfo(0, 10);
   }
 
-  ngOnInit() {
-    this.listarInfo();
+  cambioPagina(e: any) {
+    console.log('pagina' +  e);
+    this.listarInfo(e.pageIndex, e.pageSize);
+  }
+
+  listarInfo(page: number, size: number) {
+    this.servicio.listarPublicos(page, size).subscribe( data => {
+      console.log(data);
+      console.log(data.content);
+      console.log(data.totalElements);
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.sort = this.sort;
+      this.cantidad = data.totalElements;
+      //this.dataSource.paginator = this.paginator;
+    });
   }
 }

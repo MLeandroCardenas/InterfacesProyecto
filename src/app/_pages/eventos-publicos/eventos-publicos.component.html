@@ -9,7 +9,7 @@
             <mat-header-cell *matHeaderCellDef mat-sort-header> id </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
         </ng-container>
-      <!--
+      
       <ng-container matColumnDef="nombre">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.nombre_evento}} </mat-cell>
@@ -25,15 +25,13 @@
         <mat-cell *matCellDef="let element"> {{element.nombre_zona}} </mat-cell>
       </ng-container>
 
-      
       <ng-container matColumnDef="fecha">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.horario}} </mat-cell>
       </ng-container>
-      -->
-
+    
       <ng-container matColumnDef="acciones">
-        <mat-header-cell *matHeaderCellDef> Registro </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef> Registrarme </mat-header-cell>
         <button mat-button color="warn">
             <mat-icon>post_add</mat-icon>
         </button>
@@ -46,7 +44,9 @@
 
     <mat-paginator [length]="100"
       [pageSize]="10"
-      [pageSizeOptions]="[5, 10, 25, 100]">
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      [length]="cantidad"
+      (page)="cambioPagina($event)">
     </mat-paginator>
 </div>
   

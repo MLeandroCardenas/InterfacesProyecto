@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +10,10 @@ export class MenuPrincipalComponent implements OnInit {
 
   constructor() { }
 
+  public titulo: string;
+
   ngOnInit() {
+    this.titulo = environment.NOMBREAPP;
   }
 
 }
