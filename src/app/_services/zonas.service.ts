@@ -3,7 +3,6 @@ import { Zonas } from './../_model/Zonas';
 import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

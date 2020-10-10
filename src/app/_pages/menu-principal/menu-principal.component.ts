@@ -10,7 +10,7 @@ export class MenuPrincipalComponent implements OnInit {
 
   constructor() { }
 
-  public titulo: string;
+  protected titulo: string;
 
   ngOnInit() {
     this.titulo = environment.NOMBREAPP;

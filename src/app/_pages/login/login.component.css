@@ -1,7 +1,7 @@
 :host{
     display: flex;
     justify-content: center;
-    margin: 50px 0;
+    margin: 80px 0;
 }
 
 .mat-form-field{

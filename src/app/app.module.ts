@@ -18,6 +18,8 @@ import { ValidacionCorreoAsincronaDirective } from './_validaciones/validacion-c
 import { Not404Component } from './_pages/not404/not404.component';
 import { ZonasComponent } from './_pages/zonas/zonas.component';
 import { LectoresComponent } from './_pages/lectores/lectores.component';
+import { PerfilUsuarioComponent } from './_pages/perfil-usuario/perfil-usuario.component';
+import { DialogoEdicionClaveComponent } from './_pages/dialogo-edicion-clave/dialogo-edicion-clave.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +35,12 @@ import { LectoresComponent } from './_pages/lectores/lectores.component';
     Not404Component,
     ZonasComponent,
     LectoresComponent,
+    PerfilUsuarioComponent,
+    DialogoEdicionClaveComponent,
   ],
   entryComponents: [
-    VistaDialogoRecuperacionComponent
+    VistaDialogoRecuperacionComponent,
+    DialogoEdicionClaveComponent
   ],
   imports: [
     BrowserModule,

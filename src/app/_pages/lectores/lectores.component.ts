@@ -7,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Lectores } from './../../_model/Lectores';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-lectores',
@@ -26,13 +27,20 @@ export class LectoresComponent implements OnInit {
   isSaving: boolean;
   campoZona: boolean = false;
   public arrayZonas: Zonas[];
+  protected lectores: Lectores[];
 
   constructor(private servicio: ZonasService,
               private snackBar: MatSnackBar,
-              private formBuilder: FormBuilder
-              ) { }
+              private formBuilder: FormBuilder,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data.subscribe((datos: { datosLectores: Lectores[] }) => {
+      this.lectores = datos.datosLectores;
+      this.dataSource = new MatTableDataSource(this.lectores);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
     this.listarLectores();
     this.iniciarFormuario();
     this.servicio.eventoZona.subscribe(() => {

@@ -19,7 +19,12 @@ export class CanActivateGuard implements CanActivate, CanActivateChild {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+      let urlActual = state.url;
+      let rol = environment.ROL;
       if (this.servicio.ObtenerToken() === null) {
+        this.route.navigate(['/login']);
+        return false;
+      } else if (rol !== 'Administrador' && urlActual === '/funcionalidad/lectores') {
         this.route.navigate(['/login']);
         return false;
       }

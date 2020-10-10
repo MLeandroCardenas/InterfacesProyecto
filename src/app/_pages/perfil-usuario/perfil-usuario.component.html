@@ -1,0 +1,24 @@
+<div class="foto-opciones">
+    <img src="assets/img/porDefecto.png" width="80" height="80"><br>
+    <button mat-button style="float: none; background-color: green;">
+        <span>Cambiar foto</span>
+        <mat-icon>cloud_upload</mat-icon>
+    </button>
+</div>
+
+<div class="contenedor">
+    <mat-card>Datos personales</mat-card>
+    <br><br>
+    <label>Apellidos:  <span>{{usuario.apellidos}}</span> </label> 
+    <br><br>
+    <label>Nombres: <span>{{usuario.nombres}}</span> </label>
+    <br><br>
+    <label>Cargo: <span>{{usuario.rol}}</span> </label>
+    <br><br>
+    <label>Identificacion: <span>{{usuario.identificacion}}</span> </label>
+    <br><br>
+    <button mat-button style="float: none; background-color: green;" (click)="dialogoRecuperacion()">
+        <span>Cambiar contraseña</span>
+        <mat-icon>edit</mat-icon>
+    </button>   
+</div>

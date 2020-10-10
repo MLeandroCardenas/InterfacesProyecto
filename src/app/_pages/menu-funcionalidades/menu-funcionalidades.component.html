@@ -15,7 +15,7 @@
 
     <mat-menu #menu="matMenu">
       <!--Todos los roles-->
-      <button mat-menu-item routerLink="/perfil">
+      <button mat-menu-item routerLink="./miperfil">
         <mat-icon>account_box</mat-icon>
         <span>Mi Perfil</span>
       </button>
@@ -37,7 +37,7 @@
         </button>
         <mat-divider></mat-divider>
 
-      <div *ngIf="rolUsuario === 1">
+      <div *ngIf="rolUsuario === 'Administrador'">
         <!--Administrador-->
         <button mat-menu-item style="cursor: pointer" routerLink="" (click)="sidenav.opened = false">
           <mat-icon>assessment</mat-icon>
@@ -53,7 +53,7 @@
       </button>
       <mat-divider></mat-divider>
 
-      <div *ngIf="rolUsuario !== 1">
+      <div *ngIf="rolUsuario !== 'Administrador'">
         <!--docentes, estudiantes, administrativos-->
         <button mat-menu-item style="cursor: pointer" routerLink="" (click)="sidenav.opened = false">
           <mat-icon>calendar_today</mat-icon>
@@ -62,7 +62,7 @@
         <mat-divider></mat-divider>
       </div>
 
-      <div *ngIf="rolUsuario === 1">
+      <div *ngIf="rolUsuario === 'Administrador'">
         <!--administrador-->
         <button mat-menu-item style="cursor: pointer" routerLink="" (click)="sidenav.opened = false">
           <mat-icon>supervised_user_circle</mat-icon>
@@ -71,16 +71,16 @@
         <mat-divider></mat-divider>
       </div>
 
-      <div *ngIf="rolUsuario === 1">
+      <div *ngIf="rolUsuario === 'Administrador'">
         <!--administrador-->
-        <button mat-menu-item style="cursor: pointer" routerLink="/funcionalidad/zonas" (click)="sidenav.opened = false">
+        <button mat-menu-item style="cursor: pointer" routerLink="./lectores" (click)="sidenav.opened = false">
           <mat-icon>build</mat-icon>
           <span>Zonas</span>
         </button>
         <mat-divider></mat-divider>
       </div>
 
-      <div *ngIf="rolUsuario === 1">
+      <div *ngIf="rolUsuario === 'Administrador'">
         <!--administrador-->
         <button mat-menu-item style="cursor: pointer" routerLink="" (click)="sidenav.opened = false">
           <mat-icon>assignment_ind</mat-icon>

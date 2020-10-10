@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   HOST: 'http://127.0.0.1:8000/api/',
   AUTH: 'http://127.0.0.1:8000/oauth/token',
-  NOMBREAPP: 'SICAC UDEC'
+  NOMBREAPP: 'SICAC UDEC',
+  ROL: ''
 };
 
 /*

@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-zonas',
@@ -25,8 +26,11 @@ export class ZonasComponent implements OnInit {
   isVisible: boolean = false;
   isSaving: boolean;
   public arrayLectores: Lectores[];
+  protected zonas: Zonas[];
 
-  constructor(private servicio: ZonasService, private snackBar: MatSnackBar, private formBuilder: FormBuilder) { }
+  constructor(private servicio: ZonasService,
+        private snackBar: MatSnackBar,
+         private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.listarZonas();

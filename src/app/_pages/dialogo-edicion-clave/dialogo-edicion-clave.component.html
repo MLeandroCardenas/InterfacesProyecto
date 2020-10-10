@@ -1,0 +1,35 @@
+<mat-card>
+    <mat-card-title>Edicion de contraseña</mat-card-title>
+    <form class="example-form" [formGroup]="formEdicionClave" (ngSubmit)="enviar()">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Contraseña actual" type="password" maxlength="12" required
+                formControlName="actual">
+        </mat-form-field>
+        <div class="alert-danger" *ngIf="actual.invalid && (actual.dirty || actual.touched)">
+            <div class="container-error-message" *ngIf="actual.errors.required">
+                Contraseña requerida
+            </div>
+        </div>
+        <br>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nueva contraseña" type="password" maxlength="12" required
+                formControlName="nueva">
+        </mat-form-field>
+        <div class="alert-danger" *ngIf="nueva.invalid && (nueva.dirty || nueva.touched)">
+            <div class="container-error-message" *ngIf="nueva.errors.required">
+                Contraseña requerida
+            </div>
+            <div class="container-error-message" *ngIf="nueva.errors.minlength">
+                Mínimo 6 caracteres
+            </div>
+            <div class="container-error-message" *ngIf="nueva.errors.validarClave">
+                {{nueva.errors.validarClave.message}}
+            </div>
+        </div>
+
+        <button mat-raised-button type="submit" class="boton">
+            <span>Enviar</span>
+        </button>
+    </form>
+    <br>
+</mat-card>

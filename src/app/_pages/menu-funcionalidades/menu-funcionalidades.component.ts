@@ -11,15 +11,17 @@ import { environment } from 'src/environments/environment';
 })
 export class MenuFuncionalidadesComponent implements OnInit {
 
-  public rolUsuario: number;
-  public titulo: string;
+  protected rolUsuario: string;
+  protected titulo: string;
 
-  constructor(private servicio: AutenticacionService, private route: Router) { }
+  constructor(private servicio: AutenticacionService) { }
 
   ngOnInit() {
     this.titulo = environment.NOMBREAPP;
-    this.servicio.rolUsuarioAutenticado().subscribe( data => {
-      this.rolUsuario = data as number;
+    this.servicio.usuarioAutenticado().subscribe( data => {
+      this.rolUsuario = data.rol;
+      this.servicio.infoUsuario.next();
+      environment.ROL = this.rolUsuario;
     });
   }
 

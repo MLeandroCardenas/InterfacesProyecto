@@ -1,10 +1,11 @@
+import { PerfilUsuario } from './../_model/PerfilUsuario';
 import { Router } from '@angular/router';
 import { Autenticacion } from './../_model/Autenticacion';
 import { Usuario } from './../_model/Usuario';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Observable} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +16,14 @@ export class AutenticacionService {
   urlAutenticacion: string = environment.AUTH;
   private readonly claveToken = 'autenticado';
   private readonly claveNuevoToken = 'nuevo';
+  infoUsuario = new Subject<void>();
 
   constructor(private http: HttpClient, private route: Router) { }
 
   guardarAuth(data: any) {
     sessionStorage.setItem(this.claveToken, data.access_token);
     sessionStorage.setItem(this.claveNuevoToken, data.refresh_token);
-    this.route.navigate(['/funcionalidad/zonas']);
+    this.route.navigate(['/funcionalidad/miperfil']);
   }
 
   actualizarCredenciales(data: any) {
@@ -62,8 +64,8 @@ export class AutenticacionService {
     return this.http.post<any>(this.urlAutenticacion, auth);
   }
 
-  rolUsuarioAutenticado() {
-    return this.http.get(`${this.url}/autenticado`);
+  usuarioAutenticado() {
+    return this.http.get<PerfilUsuario>(`${this.url}/autenticado`);
   }
 
   cerrarSesion() {
