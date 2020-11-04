@@ -1,15 +1,20 @@
 <div class="foto-opciones">
-    <img src="assets/img/porDefecto.png" width="80" height="80"><br>
-    <button mat-button style="float: none; background-color: green;">
-        <span>Cambiar foto</span>
-        <mat-icon>cloud_upload</mat-icon>
-    </button>
+    <form class="example-form" [formGroup]="formFoto" (ngSubmit)="subir()" enctype="multipart/form-data">
+        <img src="" width="80" height="80"><br>
+        <input id="singleFile" type="file" name="archivoFoto" accept="image/jpg,image/jpeg"
+            (change)="capturarFoto($event.target.files)" formControlName="archivo"/>
+        <br><br>
+        <button mat-button style="float: none; background-color: green;">
+            <span>Guardar fotografia</span>
+            <mat-icon>cloud_upload</mat-icon>
+        </button>
+        <br>
+    </form>
 </div>
-
 <div class="contenedor">
     <mat-card>Datos personales</mat-card>
-    <br><br>
-    <label>Apellidos:  <span>{{usuario.apellidos}}</span> </label> 
+    <br>
+    <label>Apellidos: <span>{{usuario.apellidos}}</span> </label>
     <br><br>
     <label>Nombres: <span>{{usuario.nombres}}</span> </label>
     <br><br>
@@ -20,5 +25,5 @@
     <button mat-button style="float: none; background-color: green;" (click)="dialogoRecuperacion()">
         <span>Cambiar contraseña</span>
         <mat-icon>edit</mat-icon>
-    </button>   
+    </button>
 </div>

@@ -1,5 +1,5 @@
 export class Autenticacion {
-    username: string;
+    email: string;
     password: string;
     grant_type: string;
     client_id: number;

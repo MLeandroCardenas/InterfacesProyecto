@@ -47,7 +47,7 @@ export class AutenticacionService {
 
   loginToken(username: string, password: string): Observable<any> {
     let auth = new Autenticacion();
-    auth.username = username;
+    auth.email = username;
     auth.password = password;
     auth.grant_type = 'password';
     auth.client_id = 2;
@@ -68,9 +68,14 @@ export class AutenticacionService {
     return this.http.get<PerfilUsuario>(`${this.url}/autenticado`);
   }
 
+  deshabilitarToken() {
+    return this.http.get<any>(`${this.url}/logout`);
+  }
+
   cerrarSesion() {
     sessionStorage.removeItem(this.claveToken);
     sessionStorage.removeItem(this.claveNuevoToken);
+    this.deshabilitarToken();
     this.route.navigate(['/login']);
   }
 

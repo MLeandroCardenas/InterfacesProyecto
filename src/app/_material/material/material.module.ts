@@ -19,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFileUploadModule } from 'angular-material-fileupload';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSnackBarModule,
     MatSidenavModule,
     MatTabsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFileUploadModule
   ],
   exports: [
     MatToolbarModule,
@@ -64,7 +66,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatSnackBarModule,
     MatSidenavModule,
     MatTabsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFileUploadModule
   ]
 })
 export class MaterialModule { }

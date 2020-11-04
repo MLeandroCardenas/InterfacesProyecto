@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
           Validators.email,
           Validators.required,
           Validators.minLength(5),
-          Validators.maxLength(200),
-          ValidacionesCorreo.validarServidorCorreo
+          //ValidacionesCorreo.validarServidorCorreo,
+          Validators.maxLength(200)
         ]),
 
       clave: new FormControl('',
@@ -59,9 +59,10 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let username = this.formLogin.get('correo').value;
+    let email = this.formLogin.get('correo').value;
     let password = this.formLogin.get('clave').value;
-    this.servicio.loginToken(username, password).subscribe(data => {
+    this.servicio.loginToken(email, password).subscribe(data => {
+      this.mostrarMensaje(data as string, 'Mensaje');
       this.servicio.guardarAuth(data);
     });
   }

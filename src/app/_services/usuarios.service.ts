@@ -1,3 +1,5 @@
+import { Archivo } from './../_model/Archivo';
+import { Clave } from './../_model/Clave';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -10,7 +12,11 @@ export class UsuariosService {
   url: string = `${environment.HOST}v1`;
   constructor(private http: HttpClient) { }
 
-  editarClave(actual: string, nueva: string) {
-    return this.http.patch(`${this.url}/nueva/`, null);
+  editarClave(clave: Clave) {
+    return this.http.patch(`${this.url}/nueva`, clave);
+  }
+
+  cambiarFotoPerfil(archivo: any) {
+    return this.http.patch(`${this.url}/fotoperfil`, archivo);
   }
 }

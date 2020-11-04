@@ -53,9 +53,9 @@ export class RegistroComponent implements OnInit {
       correo: ['', {
           validators: [Validators.required,
             Validators.email,
+            // ValidacionesCorreo.validarServidorCorreo,
             Validators.minLength(5),
-            Validators.maxLength(200),
-            ValidacionesCorreo.validarServidorCorreo],
+            Validators.maxLength(200)],
 
           asyncValidators: [this.validarCorreoUnico.validate.bind(this.validarCorreoUnico)],
           updateOn: 'blur'
@@ -105,20 +105,19 @@ export class RegistroComponent implements OnInit {
   }
 
   registro() {
-      // tslint:disable-next-line: prefer-const
       let usuario = new Usuario();
       usuario.apellidos = this.formRegistro.get('apellidos').value;
       usuario.nombres = this.formRegistro.get('nombres').value;
-      usuario.username = this.formRegistro.get('correo').value;
+      usuario.email = this.formRegistro.get('correo').value;
       usuario.identificacion = this.formRegistro.get('identificacion').value;
       usuario.password = this.formRegistro.get('clave').value;
       usuario.id_rol = this.formRegistro.get('rol').value;
       usuario.estado = 1;
       if (this.formRegistro.valid) {
-        this.servicio.registroUsuarios(usuario).subscribe(() => {
+        this.servicio.registroUsuarios(usuario).subscribe( data => {
+          this.refrescar();
+          this.mostrarMensaje(data as string, 'Mensaje');
         });
-        this.mostrarMensaje('Registrado correctamente', 'Registro');
-        this.refrescar();
       } else {
         this.mostrarMensaje('Debe rellenar todos los campos', 'Advertencia');
       }

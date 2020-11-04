@@ -1,3 +1,4 @@
+import { Clave } from './../../_model/Clave';
 import { UsuariosService } from './../../_services/usuarios.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -42,9 +43,10 @@ export class DialogoEdicionClaveComponent implements OnInit {
     if (!this.formEdicionClave.valid) {
       this.mostrarMensaje('Debe rellenar todos los campos', 'Advertencia');
     } else {
-      let claveActual = this.formEdicionClave.get('actual').value;
-      let claveNueva = this.formEdicionClave.get('nueva').value;
-      this.servicio.editarClave(claveActual, claveNueva).subscribe( data => {
+      let clave = new Clave();
+      clave.actual = this.formEdicionClave.get('actual').value;
+      clave.nueva = this.formEdicionClave.get('nueva').value;
+      this.servicio.editarClave(clave).subscribe( data => {
         this.mostrarMensaje(data as string, 'Mensaje');
         this.dialogRef.close();
       });
