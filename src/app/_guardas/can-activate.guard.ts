@@ -22,10 +22,10 @@ export class CanActivateGuard implements CanActivate, CanActivateChild {
       let urlActual = state.url;
       let rol = environment.ROL;
       if (this.servicio.ObtenerToken() === null) {
-        this.route.navigate(['/login']);
+        this.route.navigate(['auth/login']);
         return false;
       } else if (rol !== 'Administrador' && urlActual === '/funcionalidad/lectores') {
-        this.route.navigate(['/login']);
+        this.route.navigate(['auth/login']);
         return false;
       }
       return true;

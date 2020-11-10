@@ -1,0 +1,39 @@
+<mat-card>
+    <mat-card-title>Recuperación de cuenta</mat-card-title>
+        <form class="example-form"  [formGroup]="formRecuperacion" (ngSubmit)="reestablecer()">
+            <mat-form-field class="example-full-width"> 
+                <input matInput placeholder="Correo electronico" type="email" minlength="5" maxlength="200" required formControlName="email">
+            </mat-form-field>
+            <div class="alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+                <div class="container-error-message" *ngIf="email.errors.required">
+                    Correo requerido
+                </div>
+                <div class="container-error-message" *ngIf="email.errors.minlength">
+                    Mínimo 5 caracteres
+                </div>
+                <div class="container-error-message" *ngIf="email.invalid">
+                    Correo inválido
+                </div>
+            </div>
+
+            <mat-form-field class="example-full-width"> 
+                <input matInput placeholder="Contraseña" type="password" minlength="6" maxlength="12" required formControlName="clave">
+            </mat-form-field>
+            <div class="alert-danger" *ngIf="clave.invalid && (clave.dirty || clave.touched)">
+                <div class="container-error-message" *ngIf="clave.errors.required">
+                    Contraseña requerida
+                </div>
+                <div class="container-error-message" *ngIf="clave.errors.minlength">
+                    Mínimo 6 caracteres
+                </div>
+                <div class="container-error-message" *ngIf="clave.errors.validarClave">
+                   {{clave.errors.validarClave.message}}
+                </div>
+            </div>
+            <br>
+            <button mat-raised-button type="submit" class="boton">
+                <span>Enviar</span>
+            </button>
+        </form>
+        <br>
+</mat-card>

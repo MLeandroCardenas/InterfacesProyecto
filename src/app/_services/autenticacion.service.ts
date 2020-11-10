@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { RecuperacionCuenta } from '../_model/RecuperacionCuenta';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AutenticacionService {
 
   guardarAuth(data: any) {
     sessionStorage.setItem(this.claveToken, data.access_token);
-    sessionStorage.setItem(this.claveNuevoToken, data.refresh_token);
+   // sessionStorage.setItem(this.claveNuevoToken, data.refresh_token);
     this.route.navigate(['/funcionalidad/miperfil']);
   }
 
@@ -76,18 +77,26 @@ export class AutenticacionService {
     sessionStorage.removeItem(this.claveToken);
     sessionStorage.removeItem(this.claveNuevoToken);
     this.deshabilitarToken();
-    this.route.navigate(['/login']);
+    this.route.navigate(['auth/login']);
   }
 
   registroUsuarios(usuarios: Usuario) {
     return this.http.post(`${this.url}/registro`, usuarios);
   }
 
-  solicitarRecuperacion(correo: string) {
-    return this.http.patch(`${this.url}/solicitud`, correo);
+  solicitarRecuperacion(correo: string): Observable<string> {
+    return this.http.post<string>(`${this.url}/solicitar/${correo}`, correo);
   }
 
   obtenerCorreoRegistrado(correo: string): Observable<string> {
     return this.http.get<string>(`${this.url}/consultacorreo/${correo}`);
+  }
+
+  recuperarCuentaUsuario(cuenta: RecuperacionCuenta) {
+    return this.http.post(`${this.url}/actualizar`, cuenta);
+  }
+
+  validarTokenRecuperacionCuenta(token: string) {
+    return this.http.get(`${this.url}/buscar/${token}`);
   }
 }

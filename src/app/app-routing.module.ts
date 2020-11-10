@@ -4,20 +4,22 @@ import { PerfilUsuarioComponent } from './_pages/perfil-usuario/perfil-usuario.c
 import { Not404Component } from './_pages/not404/not404.component';
 import { CanActivateGuard } from './_guardas/can-activate.guard';
 import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
-import { SolicitudRecuperacionComponent } from './_pages/solicitud-recuperacion/solicitud-recuperacion.component';
 import { EventosPublicosComponent } from './_pages/eventos-publicos/eventos-publicos.component';
 import { RegistroComponent } from './_pages/registro/registro.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ZonasResolverGuard } from './_resolvers/zonas-resolver.guard';
+import { ConfirmacionRegistroComponent } from './_pages/confirmacion-registro/confirmacion-registro.component';
+import { ReestablecerCuentaComponent } from './_pages/reestablecer-cuenta/reestablecer-cuenta.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
-  {path: 'registro', component: RegistroComponent},
+  {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
+  {path: 'auth/login', component: LoginComponent},
+  {path: 'auth/registro', component: RegistroComponent},
+  {path: 'auth/confirmacion/:usuario', component: ConfirmacionRegistroComponent},
   {path: 'publicos', component: EventosPublicosComponent},
-  {path: 'reestablecer', component: SolicitudRecuperacionComponent},
+  {path: 'auth/reestablecer/:token', component: ReestablecerCuentaComponent},
   {path: 'funcionalidad', component: MenuFuncionalidadesComponent, canActivate: [CanActivateGuard], canActivateChild: [CanActivateGuard],
   children: [
     {path: 'lectores', component: LectoresComponent, resolve: {datosLectores: ZonasResolverGuard}},

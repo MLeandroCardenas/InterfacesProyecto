@@ -114,7 +114,7 @@ export class RegistroComponent implements OnInit {
       usuario.id_rol = this.formRegistro.get('rol').value;
       usuario.estado = 1;
       if (this.formRegistro.valid) {
-        this.servicio.registroUsuarios(usuario).subscribe( data => {
+        this.servicio.registroUsuarios(usuario).subscribe(data => {
           this.refrescar();
           this.mostrarMensaje(data as string, 'Mensaje');
         });

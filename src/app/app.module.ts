@@ -10,8 +10,6 @@ import { RegistroComponent } from './_pages/registro/registro.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { EventosPublicosComponent } from './_pages/eventos-publicos/eventos-publicos.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { VistaDialogoRecuperacionComponent } from './_pages/vista-dialogo-recuperacion/vista-dialogo-recuperacion.component';
-import { SolicitudRecuperacionComponent } from './_pages/solicitud-recuperacion/solicitud-recuperacion.component';
 import { MenuPrincipalComponent } from './_pages/menu-principal/menu-principal.component';
 import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
 import { ValidacionCorreoAsincronaDirective } from './_validaciones/validacion-correo-asincrona.directive';
@@ -20,6 +18,9 @@ import { ZonasComponent } from './_pages/zonas/zonas.component';
 import { LectoresComponent } from './_pages/lectores/lectores.component';
 import { PerfilUsuarioComponent } from './_pages/perfil-usuario/perfil-usuario.component';
 import { DialogoEdicionClaveComponent } from './_pages/dialogo-edicion-clave/dialogo-edicion-clave.component';
+import { ConfirmacionRegistroComponent } from './_pages/confirmacion-registro/confirmacion-registro.component';
+import { ReestablecerCuentaComponent } from './_pages/reestablecer-cuenta/reestablecer-cuenta.component';
+import { DialogoSolicitudRecuperacionComponent } from './_pages/dialogo-solicitud-recuperacion/dialogo-solicitud-recuperacion.component';
 
 @NgModule({
   declarations: [
@@ -27,8 +28,7 @@ import { DialogoEdicionClaveComponent } from './_pages/dialogo-edicion-clave/dia
     RegistroComponent,
     LoginComponent,
     EventosPublicosComponent,
-    VistaDialogoRecuperacionComponent,
-    SolicitudRecuperacionComponent,
+    ReestablecerCuentaComponent,
     MenuPrincipalComponent,
     MenuFuncionalidadesComponent,
     ValidacionCorreoAsincronaDirective,
@@ -37,10 +37,13 @@ import { DialogoEdicionClaveComponent } from './_pages/dialogo-edicion-clave/dia
     LectoresComponent,
     PerfilUsuarioComponent,
     DialogoEdicionClaveComponent,
+    ConfirmacionRegistroComponent,
+    ReestablecerCuentaComponent,
+    DialogoSolicitudRecuperacionComponent
   ],
   entryComponents: [
-    VistaDialogoRecuperacionComponent,
-    DialogoEdicionClaveComponent
+    DialogoEdicionClaveComponent,
+    DialogoSolicitudRecuperacionComponent
   ],
   imports: [
     BrowserModule,

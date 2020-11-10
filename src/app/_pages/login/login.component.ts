@@ -1,10 +1,10 @@
 import { AutenticacionService } from './../../_services/autenticacion.service';
 import { ValidacionesCorreo } from './../../_validaciones/validaciones-correo';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { VistaDialogoRecuperacionComponent } from './../vista-dialogo-recuperacion/vista-dialogo-recuperacion.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material';
+import { DialogoSolicitudRecuperacionComponent } from '../dialogo-solicitud-recuperacion/dialogo-solicitud-recuperacion.component';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +17,11 @@ export class LoginComponent implements OnInit {
   /**
    * se inyecta el servicio en el constructor y ahora se pueden llamar los metodos
    */
-  constructor(
-    private dialog: MatDialog, private servicio: AutenticacionService, private mensaje: MatSnackBar) { }
+  constructor(private servicio: AutenticacionService,
+              private mensaje: MatSnackBar,
+              private dialog: MatDialog) { }
 
   formLogin: FormGroup;
-
-  dialogoRecuperacion(): void {
-    const dialogRef = this.dialog.open(VistaDialogoRecuperacionComponent, {
-      width: '400px',
-    });
-  }
 
   iniciarFormulario() {
     this.formLogin = new FormGroup({
@@ -52,6 +47,12 @@ export class LoginComponent implements OnInit {
     this.iniciarFormulario();
   }
 
+  abrirDialogo(): void {
+    const dialogRef = this.dialog.open(DialogoSolicitudRecuperacionComponent, {
+      width: '400px',
+    });
+  }
+
   mostrarMensaje(men: string, action: string) {
     this.mensaje.open(men, action, {
       duration: 3000,
@@ -62,7 +63,6 @@ export class LoginComponent implements OnInit {
     let email = this.formLogin.get('correo').value;
     let password = this.formLogin.get('clave').value;
     this.servicio.loginToken(email, password).subscribe(data => {
-      this.mostrarMensaje(data as string, 'Mensaje');
       this.servicio.guardarAuth(data);
     });
   }
