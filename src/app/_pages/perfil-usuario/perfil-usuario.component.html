@@ -1,10 +1,10 @@
 <div class="foto-opciones">
-    <form class="example-form" [formGroup]="formFoto" (ngSubmit)="subir()" enctype="multipart/form-data">
+    <form [formGroup]="formFoto" (ngSubmit)="subir()">
         <img src="" width="80" height="80"><br>
-        <input id="singleFile" type="file" name="archivoFoto" accept="image/jpg,image/jpeg"
-            (change)="capturarFoto($event.target.files)" formControlName="archivo"/>
+        <input type="file" name="fotoPerfil" accept="image/jpg, image/jpeg"
+            (change)="capturarFoto($event)"/>
         <br><br>
-        <button mat-button style="float: none; background-color: green;">
+        <button type="submit" mat-button style="float: none; background-color: green;">
             <span>Guardar fotografia</span>
             <mat-icon>cloud_upload</mat-icon>
         </button>

@@ -1,5 +1,6 @@
+import { Binary } from '@angular/compiler';
 export class Archivo {
-    nombre: string;
-    tamanio: number;
-    tipo: string;
+    name: string;
+    size: number;
+    type: string;
 }

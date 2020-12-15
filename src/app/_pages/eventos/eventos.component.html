@@ -1,0 +1,36 @@
+<div class="formulario">
+    <form [formGroup]="formEvento" (ngSubmit)="registrarEvento()">
+        <mat-form-field class="example-full-width"> 
+            <input matInput placeholder="Nombre evento" type="text" required minlength="3" maxlength="30" formControlName="evento">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width"> 
+            <textarea matInput placeholder="Descripcion evento" required minlength="5" maxlength="200" formControlName="descripcion"></textarea>        
+        </mat-form-field>
+        <br>
+        <mat-form-field>
+            <mat-label>Seleccione un lugar</mat-label>
+                <mat-select formControlName="lugar" required (valueChange)="capturarSeleccion($event)">
+                    <mat-option *ngFor="let zona of this.arrayZonas" [value]="zona.id">
+                        {{zona.nombre_zona}}                    
+                    </mat-option>
+                    <mat-option [value]="0">
+                        OTRA
+                    </mat-option>
+                </mat-select>
+        </mat-form-field>
+        <br>
+        <div *ngIf="seleccion == 0">
+            <mat-form-field class="example-full-width"> 
+                <input matInput placeholder="Nombre lugar" type="text" required minlength="3" maxlength="50" formControlName="nombreZona">
+            </mat-form-field>
+        </div>
+        <br>
+        <h5>Subir formato evento</h5>
+        <input type="file" name="fotoPerfil" accept="application/pdf"/>
+        <br> <br>
+        <button mat-raised-button type="submit" style="background-color: #228B22; color: #000;">
+            <span>Registrar evento</span>
+        </button> 
+    </form>
+</div>

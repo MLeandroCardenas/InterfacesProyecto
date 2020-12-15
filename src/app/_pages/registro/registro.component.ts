@@ -1,16 +1,13 @@
+import { Rol } from './../../_model/Rol';
 import { ValidacionCorreoAsincronaDirective } from './../../_validaciones/validacion-correo-asincrona.directive';
 import { ValidacionesCorreo } from './../../_validaciones/validaciones-correo';
 import { Usuario } from './../../_model/Usuario';
 import { AutenticacionService } from './../../_services/autenticacion.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, AsyncValidator } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ValidacionesClaves } from 'src/app/_validaciones/validaciones-claves';
-
-export interface Roles {
-  nombre: string;
-  idRol: number;
-}
+import { ValidacionIdentificacionAsincronaDirective } from 'src/app/_validaciones/validacion-identificacion-asincrona.directive';
 
 @Component({
   selector: 'app-registro',
@@ -19,19 +16,20 @@ export interface Roles {
 })
 export class RegistroComponent implements OnInit {
 
-
   constructor(
         private formBuilder: FormBuilder,
         private servicio: AutenticacionService,
         private validarCorreoUnico: ValidacionCorreoAsincronaDirective,
+        private validarIdentificacionUnica: ValidacionIdentificacionAsincronaDirective,
         private mensaje: MatSnackBar
       ) {}
 
   formRegistro: FormGroup;
   formatoDocumento: any = '[0-9]*';
-  soloLetras: any = '[A-Z ]*';
-  rolesApp: Roles[];
+  soloLetras: any = '[A-Z a-z ]*';
+  rolesApp: Rol[];
   resultado: any;
+  seleccion: number;
 
   iniciarFormuario() {
     this.formRegistro = this.formBuilder.group({
@@ -65,8 +63,11 @@ export class RegistroComponent implements OnInit {
           validators: [Validators.required,
             Validators.minLength(5),
             Validators.maxLength(15),
-            Validators.pattern(this.formatoDocumento)]
-        }],
+            Validators.pattern(this.formatoDocumento)],
+
+            asyncValidators: [this.validarIdentificacionUnica.validate.bind(this.validarIdentificacionUnica)],
+            updateOn: 'blur'
+          }],
 
       clave: ['', [Validators.required,
           Validators.minLength(6),
@@ -74,17 +75,22 @@ export class RegistroComponent implements OnInit {
           ValidacionesClaves.validarClave]
         ],
 
-        rol: ['', Validators.required],
+        rol: [this.obtenerRoles(), Validators.required],
     });
   }
 
   ngOnInit() {
     this.iniciarFormuario();
-    roles: this.rolesApp = [
-      {idRol: 4, nombre: 'Estudiante'},
-      {idRol: 3, nombre: 'Docente'},
-      {idRol: 2, nombre: 'Administrativo'}
-    ];
+  }
+
+  rolSeleccionado(evento: number) {
+    this.seleccion = evento;
+  }
+
+  obtenerRoles() {
+    this.servicio.obtenerRoles().subscribe(data => {
+      this.rolesApp = data;
+    });
   }
 
   refrescar() {
@@ -111,8 +117,8 @@ export class RegistroComponent implements OnInit {
       usuario.email = this.formRegistro.get('correo').value;
       usuario.identificacion = this.formRegistro.get('identificacion').value;
       usuario.password = this.formRegistro.get('clave').value;
-      usuario.id_rol = this.formRegistro.get('rol').value;
-      usuario.estado = 1;
+      usuario.id_rol = this.seleccion;
+
       if (this.formRegistro.valid) {
         this.servicio.registroUsuarios(usuario).subscribe(data => {
           this.refrescar();

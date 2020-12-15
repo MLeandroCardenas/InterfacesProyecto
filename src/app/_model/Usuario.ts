@@ -3,7 +3,6 @@ export class Usuario {
     apellidos: string;
     nombres: string;
     identificacion: number;
-    estado: number;
     id_rol: number;
     email: string;
     password: string;

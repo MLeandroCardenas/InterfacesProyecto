@@ -55,7 +55,7 @@
 
       <div *ngIf="rolUsuario !== 'Administrador'">
         <!--docentes, estudiantes, administrativos-->
-        <button mat-menu-item style="cursor: pointer" routerLink="" (click)="sidenav.opened = false">
+        <button mat-menu-item style="cursor: pointer" routerLink="./eventos" (click)="sidenav.opened = false">
           <mat-icon>calendar_today</mat-icon>
           <span>Eventos</span>
         </button>
@@ -64,7 +64,7 @@
 
       <div *ngIf="rolUsuario === 'Administrador'">
         <!--administrador-->
-        <button mat-menu-item style="cursor: pointer" routerLink="" (click)="sidenav.opened = false">
+        <button mat-menu-item style="cursor: pointer" routerLink="./usuarios" (click)="sidenav.opened = false">
           <mat-icon>supervised_user_circle</mat-icon>
           <span>Usuarios</span>
         </button>
@@ -75,7 +75,7 @@
         <!--administrador-->
         <button mat-menu-item style="cursor: pointer" routerLink="./lectores" (click)="sidenav.opened = false">
           <mat-icon>build</mat-icon>
-          <span>Zonas</span>
+          <span>Lectores</span>
         </button>
         <mat-divider></mat-divider>
       </div>

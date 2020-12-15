@@ -1,3 +1,4 @@
+import { Rol } from './../_model/Rol';
 import { PerfilUsuario } from './../_model/PerfilUsuario';
 import { Router } from '@angular/router';
 import { Autenticacion } from './../_model/Autenticacion';
@@ -5,7 +6,7 @@ import { Usuario } from './../_model/Usuario';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RecuperacionCuenta } from '../_model/RecuperacionCuenta';
 
 @Injectable({
@@ -17,7 +18,6 @@ export class AutenticacionService {
   urlAutenticacion: string = environment.AUTH;
   private readonly claveToken = 'autenticado';
   private readonly claveNuevoToken = 'nuevo';
-  infoUsuario = new Subject<void>();
 
   constructor(private http: HttpClient, private route: Router) { }
 
@@ -50,18 +50,18 @@ export class AutenticacionService {
     let auth = new Autenticacion();
     auth.email = username;
     auth.password = password;
-    auth.grant_type = 'password';
+   /* auth.grant_type = 'password';
     auth.client_id = 2;
-    auth.client_secret = 'VT3KzMIQFxt4DBPX5HbKxAnvfT4BQStBY64XsKRh';
+    auth.client_secret = 'VT3KzMIQFxt4DBPX5HbKxAnvfT4BQStBY64XsKRh';*/
     return this.http.post<any>(this.urlAutenticacion, auth);
   }
 
   refreshToken(nuevoToken: string): Observable<any> {
     let auth = new Autenticacion();
-    auth.client_id = 2;
+   /* auth.client_id = 2;
     auth.client_secret = 'VT3KzMIQFxt4DBPX5HbKxAnvfT4BQStBY64XsKRh';
     auth.grant_type = 'refresh_token';
-    auth.refresh_token = nuevoToken;
+    auth.refresh_token = nuevoToken; */
     return this.http.post<any>(this.urlAutenticacion, auth);
   }
 
@@ -92,11 +92,20 @@ export class AutenticacionService {
     return this.http.get<string>(`${this.url}/consultacorreo/${correo}`);
   }
 
+  obtenerIdentificacionRegistrada(identificacion: string) {
+    let oculta = btoa(identificacion);
+    return this.http.get<string>(`${this.url}/consultaIdentificacion/${oculta}`);
+  }
+
   recuperarCuentaUsuario(cuenta: RecuperacionCuenta) {
     return this.http.post(`${this.url}/actualizar`, cuenta);
   }
 
   validarTokenRecuperacionCuenta(token: string) {
     return this.http.get(`${this.url}/buscar/${token}`);
+  }
+
+  obtenerRoles() {
+    return this.http.get<Rol[]>(`${this.url}/obtenerRoles`);
   }
 }

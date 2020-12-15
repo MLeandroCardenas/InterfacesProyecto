@@ -7,7 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Lectores } from './../../_model/Lectores';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-lectores',
@@ -32,7 +32,8 @@ export class LectoresComponent implements OnInit {
   constructor(private servicio: ZonasService,
               private snackBar: MatSnackBar,
               private formBuilder: FormBuilder,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private route2: Router) { }
 
   ngOnInit() {
     this.route.data.subscribe((datos: { datosLectores: Lectores[] }) => {
@@ -46,6 +47,10 @@ export class LectoresComponent implements OnInit {
     this.servicio.eventoZona.subscribe(() => {
       this.listarLectores();
     });
+  }
+
+  redirectZonas() {
+    this.route2.navigate(['/funcionalidad/zonas']);
   }
 
   iniciarFormuario() {

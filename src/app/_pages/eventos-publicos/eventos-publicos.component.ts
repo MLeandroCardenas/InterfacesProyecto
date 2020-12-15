@@ -27,23 +27,5 @@ export class EventosPublicosComponent implements OnInit {
   constructor(private servicio: EventosService) { }
 
   ngOnInit() {
-    this.listarInfo(0, 10);
-  }
-
-  cambioPagina(e: any) {
-    console.log('pagina' +  e);
-    this.listarInfo(e.pageIndex, e.pageSize);
-  }
-
-  listarInfo(page: number, size: number) {
-    this.servicio.listarPublicos(page, size).subscribe( data => {
-      console.log(data);
-      console.log(data.content);
-      console.log(data.totalElements);
-      this.dataSource = new MatTableDataSource(data);
-      this.dataSource.sort = this.sort;
-      this.cantidad = data.totalElements;
-      //this.dataSource.paginator = this.paginator;
-    });
   }
 }

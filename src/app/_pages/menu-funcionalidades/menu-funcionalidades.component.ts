@@ -20,7 +20,6 @@ export class MenuFuncionalidadesComponent implements OnInit {
     this.titulo = environment.NOMBREAPP;
     this.servicio.usuarioAutenticado().subscribe( data => {
       this.rolUsuario = data.rol;
-      this.servicio.infoUsuario.next();
       environment.ROL = this.rolUsuario;
     });
   }

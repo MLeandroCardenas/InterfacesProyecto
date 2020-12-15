@@ -1,3 +1,4 @@
+import { EventosComponent } from './_pages/eventos/eventos.component';
 import { LectoresComponent } from './_pages/lectores/lectores.component';
 import { PerfilResolverGuard } from './_resolvers/perfil-resolver.guard';
 import { PerfilUsuarioComponent } from './_pages/perfil-usuario/perfil-usuario.component';
@@ -12,6 +13,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ZonasResolverGuard } from './_resolvers/zonas-resolver.guard';
 import { ConfirmacionRegistroComponent } from './_pages/confirmacion-registro/confirmacion-registro.component';
 import { ReestablecerCuentaComponent } from './_pages/reestablecer-cuenta/reestablecer-cuenta.component';
+import { UsuariosComponent } from './_pages/usuarios/usuarios.component';
+import { ZonasComponent } from './_pages/zonas/zonas.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -23,7 +26,10 @@ const routes: Routes = [
   {path: 'funcionalidad', component: MenuFuncionalidadesComponent, canActivate: [CanActivateGuard], canActivateChild: [CanActivateGuard],
   children: [
     {path: 'lectores', component: LectoresComponent, resolve: {datosLectores: ZonasResolverGuard}},
-    {path: 'miperfil', component: PerfilUsuarioComponent, resolve: {datosUsuario: PerfilResolverGuard}}
+    {path: 'zonas', component: ZonasComponent},
+    {path: 'miperfil', component: PerfilUsuarioComponent, resolve: {datosUsuario: PerfilResolverGuard}},
+    {path: 'usuarios', component: UsuariosComponent},
+    {path: 'eventos', component: EventosComponent}
   ]},
   {path: 'not404', component: Not404Component},
   {path: '**', redirectTo: 'not404', pathMatch: 'full'}

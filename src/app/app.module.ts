@@ -21,6 +21,9 @@ import { DialogoEdicionClaveComponent } from './_pages/dialogo-edicion-clave/dia
 import { ConfirmacionRegistroComponent } from './_pages/confirmacion-registro/confirmacion-registro.component';
 import { ReestablecerCuentaComponent } from './_pages/reestablecer-cuenta/reestablecer-cuenta.component';
 import { DialogoSolicitudRecuperacionComponent } from './_pages/dialogo-solicitud-recuperacion/dialogo-solicitud-recuperacion.component';
+import { UsuariosComponent } from './_pages/usuarios/usuarios.component';
+import { ValidacionIdentificacionAsincronaDirective } from './_validaciones/validacion-identificacion-asincrona.directive';
+import { EventosComponent } from './_pages/eventos/eventos.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +42,10 @@ import { DialogoSolicitudRecuperacionComponent } from './_pages/dialogo-solicitu
     DialogoEdicionClaveComponent,
     ConfirmacionRegistroComponent,
     ReestablecerCuentaComponent,
-    DialogoSolicitudRecuperacionComponent
+    DialogoSolicitudRecuperacionComponent,
+    UsuariosComponent,
+    ValidacionIdentificacionAsincronaDirective,
+    EventosComponent
   ],
   entryComponents: [
     DialogoEdicionClaveComponent,

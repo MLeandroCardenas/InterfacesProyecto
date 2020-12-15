@@ -58,6 +58,10 @@
         <button mat-fab type="button" (click)="showForm()" style="float: right; background-color: green;">
             <mat-icon>create</mat-icon>
         </button>
+
+        <button mat-raised-button (click)="redirectLectores()">
+            <span>Lectores</span>
+        </button>
     </div>
 
     <div [hidden]="!isVisible">
