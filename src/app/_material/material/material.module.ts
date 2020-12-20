@@ -19,7 +19,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatFileUploadModule } from 'angular-material-fileupload';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material';
+
+
 
 
 @NgModule({
@@ -45,7 +48,8 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     MatSidenavModule,
     MatTabsModule,
     MatTooltipModule,
-    MatFileUploadModule
+    MatDatepickerModule,
+    MatNativeDateModule 
   ],
   exports: [
     MatToolbarModule,
@@ -67,7 +71,8 @@ import { MatFileUploadModule } from 'angular-material-fileupload';
     MatSidenavModule,
     MatTabsModule,
     MatTooltipModule,
-    MatFileUploadModule
+    MatDatepickerModule,
+    MatNativeDateModule
   ]
 })
 export class MaterialModule { }

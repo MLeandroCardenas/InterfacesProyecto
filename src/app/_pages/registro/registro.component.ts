@@ -93,7 +93,7 @@ export class RegistroComponent implements OnInit {
     });
   }
 
-  refrescar() {
+    refrescar() {
     this.formRegistro.patchValue({
       apellidos: '',
       nombres: '',
