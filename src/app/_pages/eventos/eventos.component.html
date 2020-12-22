@@ -1,66 +1,98 @@
 <div class="formulario">
+    <h3>Registro evento</h3>
     <form [formGroup]="formEvento" (ngSubmit)="registrarEvento()">
+
         <mat-form-field class="example-full-width">
             <input matInput placeholder="Nombre evento" type="text" required minlength="3" maxlength="30"
                 formControlName="evento">
         </mat-form-field>
-        <br>
+
+        &nbsp;
+
         <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="Descripcion evento" required minlength="5" maxlength="200"
+            <textarea matInput placeholder="Descripcion" required minlength="5" maxlength="200"
                 formControlName="descripcion"></textarea>
         </mat-form-field>
+
         <br>
-        <mat-form-field>
-            <mat-label>Seleccione un lugar</mat-label>
-            <mat-select formControlName="lugar" required (valueChange)="capturarSeleccion($event)">
-                <mat-option *ngFor="let zona of this.arrayZonas" [value]="zona.id">
-                    {{zona.nombre_zona}}
-                </mat-option>
-                <mat-option [value]="0">
-                    OTRA
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <br>
-        <div *ngIf="seleccion == 0">
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Nombre lugar" type="text" minlength="3" maxlength="50"
-                    formControlName="nombreZona">
+
+        <section>
+
+            <mat-form-field>
+                <mat-label>Lugar</mat-label>
+                <mat-select formControlName="lugar" required (valueChange)="capturarSeleccion($event)">
+                    <mat-option *ngFor="let zona of this.arrayZonas" [value]="zona.id">
+                        {{zona.nombre_zona}}
+                    </mat-option>
+                    <mat-option [value]="0">
+                        OTRA
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
-        </div>
-        <br>
-        <mat-form-field>
-            <mat-label>Categoria evento</mat-label>
-            <mat-select formControlName="categoriaEvento" required>
-                <mat-option *ngFor="let categoria of this.categoriaEvento" [value]="categoria.valor">
-                    {{categoria.nombre}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <p>
+            &nbsp;
+
+            <div *ngIf="seleccion == 0">
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nombre lugar" type="text" minlength="3" maxlength="50"
+                        formControlName="nombreZona">
+                </mat-form-field>
+            </div>
+            &nbsp;
+
+            <mat-form-field>
+                <mat-label>Categoria</mat-label>
+                <mat-select formControlName="categoriaEvento" required>
+                    <mat-option *ngFor="let categoria of this.categoriaEvento" [value]="categoria.valor">
+                        {{categoria.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        </section>
+
+        <section>
+
             <mat-form-field>
                 <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de evento"
                     required formControlName="fecha">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+
             Hora inicio <input type="time" id="horaInicio" name="horaInicio" min="07:00" max="21:00" required
                 formControlName="horaInicio">
             Hora Fin <input type="time" id="horaFin" name="horaFin" min="07:00" max="21:00" required
                 formControlName="horaFin">
-                &nbsp;
-            <button mat-icon-button type="button" style="float: initial; background-color: green;" matTooltip="Agregar" 
+            &nbsp;
+
+            <button mat-icon-button type="button" style="float: initial; background-color: green;" matTooltip="Agregar"
                 [disabled]='!formEvento.valid' (click)="agregarFechas()">
                 <mat-icon>add</mat-icon>
             </button>
-        </p>
 
-        <p>Cargar formato evento
-            <input type="file" name="fotoPerfil" accept="application/pdf" />
-        </p>
+            <tr *ngFor="let evento of this.listaFechas; let i= index">
+                <td> <span>Fecha: </span> {{evento.fecha.toString().substr(1,16)}}</td>
+                &nbsp;
+                <td><span>Inicio: </span> {{evento.inicio}}</td>
+                &nbsp;
+                <td> <span>Fin: </span> {{evento.fin}}</td>
+                <td>
+                    <button mat-icon-button type="button" matTooltip="Eliminar"
+                        [disabled]='!formEvento.valid' (click)="eliminarFecha(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </tr>
+        </section>
         <br>
-        <button mat-raised-button type="submit" style="background-color: #228B22; color: #000;">
-            <span>Registrar evento</span>
-        </button>
+
+        <section>
+            Cargar formato evento
+            <input type="file" name="fotoPerfil" accept="application/pdf" />
+            &nbsp;
+            <button mat-raised-button type="submit" style="background-color: #228B22; color: #000;">
+                <span>Registrar evento</span>
+            </button>
+        </section>
     </form>
 </div>

@@ -1,3 +1,4 @@
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { AuthInterceptorService } from './_compartido/auth-interceptor.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MaterialModule } from './_material/material/material.module';
@@ -24,6 +25,21 @@ import { DialogoSolicitudRecuperacionComponent } from './_pages/dialogo-solicitu
 import { UsuariosComponent } from './_pages/usuarios/usuarios.component';
 import { ValidacionIdentificacionAsincronaDirective } from './_validaciones/validacion-identificacion-asincrona.directive';
 import { EventosComponent } from './_pages/eventos/eventos.component';
+import { MatDateFormats, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS } from '@angular/material';
+
+export const GRI_DATE_FORMATS: MatDateFormats = {
+  parse: {
+    dateInput: ['YYYY-MM-DD']
+  },
+  display: {
+    ...MAT_NATIVE_DATE_FORMATS.display,
+    dateInput: {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    } as Intl.DateTimeFormatOptions,
+  }
+};
 
 @NgModule({
   declarations: [
@@ -59,11 +75,15 @@ import { EventosComponent } from './_pages/eventos/eventos.component';
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [{
+  providers: [
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptorService,
-    multi: true
-  }],
+    multi: true,
+    },
+    {provide: MAT_DATE_LOCALE, useValue: 'es-CO'},
+    {provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

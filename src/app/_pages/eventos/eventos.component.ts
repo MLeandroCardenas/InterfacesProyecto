@@ -17,9 +17,8 @@ export interface categorias {
   templateUrl: './eventos.component.html',
   styleUrls: ['./eventos.component.css']
 })
-export class EventosComponent implements OnInit {
 
-  
+export class EventosComponent implements OnInit {
 
   public formEvento: FormGroup;
   public arrayZonas: Zonas[];
@@ -63,6 +62,12 @@ export class EventosComponent implements OnInit {
     });
   }
 
+  mostrarMensaje(message: string, action: string){
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
+  }
+
   refrescar(){
     this.formEvento.patchValue({
       evento: '',
@@ -86,20 +91,16 @@ export class EventosComponent implements OnInit {
     this.seleccion = evento;
   }
 
+  eliminarFecha(indice: number){
+    this.listaFechas.splice(indice,1);
+  }
+
   agregarFechas(){
     let fecha = new FechaEvento();
     fecha.fecha = this.formEvento.get('fecha').value;
     fecha.inicio = this.formEvento.get('horaInicio').value;
     fecha.fin = this.formEvento.get('horaFin').value;
     this.listaFechas.push(fecha);
-    this.mostrarMensaje('Agregada correctamente', 'Mensaje');
-    console.log(this.listaFechas);
-  }
-
-  mostrarMensaje(message: string, action: string){
-    this.snackBar.open(message, action, {
-      duration: 3000,
-    });
   }
 
   setearValores(valor: string) {
