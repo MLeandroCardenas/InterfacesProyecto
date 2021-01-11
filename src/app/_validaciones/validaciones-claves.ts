@@ -4,8 +4,7 @@ export class ValidacionesClaves {
     static validarClave(control: FormControl): ValidationErrors {
         // tslint:disable-next-line: prefer-const
         let clavesProhibidas = ['123456', '123456789', 'abcdefg', '000000', '000000000'];
-        let clave: string;
-        clave = control.value as string;
+        let clave: string = control.value;
         if ( !clave ) {return; }
         if ( clave.length < 6) { return; }
         if ( clavesProhibidas.indexOf(clave) !== -1) {

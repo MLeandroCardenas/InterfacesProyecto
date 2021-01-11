@@ -1,5 +1,5 @@
 export class FechaEvento {
-    fecha: String;
+    fecha: string;
     inicio: string;
     fin: string;
 }

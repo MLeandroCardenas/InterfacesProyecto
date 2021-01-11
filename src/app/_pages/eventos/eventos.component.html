@@ -3,24 +3,21 @@
     <form [formGroup]="formEvento" (ngSubmit)="registrarEvento()">
 
         <mat-form-field class="example-full-width">
-            <input matInput placeholder="Nombre evento" type="text" required minlength="3" maxlength="30"
-                formControlName="evento">
+            <input matInput placeholder="Nombre evento" type="text" formControlName="evento">
         </mat-form-field>
 
         &nbsp;
 
         <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="Descripcion" required minlength="5" maxlength="200"
-                formControlName="descripcion"></textarea>
+            <textarea matInput placeholder="Descripcion" formControlName="descripcion"></textarea>
         </mat-form-field>
 
         <br>
 
         <section>
-
             <mat-form-field>
                 <mat-label>Lugar</mat-label>
-                <mat-select formControlName="lugar" required (valueChange)="capturarSeleccion($event)">
+                <mat-select formControlName="lugar" (valueChange)="capturarSeleccion($event)">
                     <mat-option *ngFor="let zona of this.arrayZonas" [value]="zona.id">
                         {{zona.nombre_zona}}
                     </mat-option>
@@ -33,52 +30,52 @@
 
             <div *ngIf="seleccion == 0">
                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Nombre lugar" type="text" minlength="3" maxlength="50"
-                        formControlName="nombreZona">
+                    <input matInput placeholder="Nombre lugar" type="text" formControlName="nombreZona">
                 </mat-form-field>
             </div>
             &nbsp;
 
             <mat-form-field>
                 <mat-label>Categoria</mat-label>
-                <mat-select formControlName="categoriaEvento" required>
+                <mat-select formControlName="categoriaEvento">
                     <mat-option *ngFor="let categoria of this.categoriaEvento" [value]="categoria.valor">
                         {{categoria.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-
         </section>
 
         <section>
-
             <mat-form-field>
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de evento"
-                    required formControlName="fecha">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" 
+                    placeholder="Fecha de evento" formControlName="fecha" (dateChange)="capturarFechaEvento()">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
 
-            Hora inicio <input type="time" id="horaInicio" name="horaInicio" min="07:00" max="21:00" required
-                formControlName="horaInicio">
-            Hora Fin <input type="time" id="horaFin" name="horaFin" min="07:00" max="21:00" required
-                formControlName="horaFin">
-            &nbsp;
+                Hora inicio
+                <input type="time" formControlName="horaInicio" (change)="habilitarHoraFin()">
 
-            <button mat-icon-button type="button" style="float: initial; background-color: green;" matTooltip="Agregar"
-                [disabled]='!formEvento.valid' (click)="agregarFechas()">
-                <mat-icon>add</mat-icon>
-            </button>
+                Hora Fin
+                <input type="time" formControlName="horaFin" (change)="minimoHoraFinMismoDia()">
+
+                &nbsp;
+
+                <button mat-icon-button type="button" style="float: initial; background-color: green;"
+                    matTooltip="Agregar" [formNoValidate]="true" (click)="agregarFechas()">
+                    <mat-icon>add</mat-icon>
+                </button>
+
 
             <tr *ngFor="let evento of this.listaFechas; let i= index">
-                <td> <span>Fecha: </span> {{evento.fecha.toString().substr(1,16)}}</td>
+                <td> <span>Dia: </span> {{evento.fecha}}</td>
                 &nbsp;
                 <td><span>Inicio: </span> {{evento.inicio}}</td>
                 &nbsp;
                 <td> <span>Fin: </span> {{evento.fin}}</td>
                 <td>
-                    <button mat-icon-button type="button" matTooltip="Eliminar"
-                        [disabled]='!formEvento.valid' (click)="eliminarFecha(i)">
+                    <button mat-icon-button type="button" matTooltip="Eliminar" [formNoValidate]="true"
+                        (click)="eliminarFecha(i)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
@@ -94,5 +91,29 @@
                 <span>Registrar evento</span>
             </button>
         </section>
+
+        <div class="alert-danger" *ngIf="horaInicio.invalid && (horaInicio.dirty || horaInicio.touched)">
+            <div class="container-error-message" *ngIf="horaInicio.errors.validarMinimoHoraInicio">
+                {{horaInicio.errors.validarMinimoHoraInicio.message}}
+            </div>
+        </div>
+
+        <div class="alert-danger" *ngIf="horaInicio.invalid && (horaInicio.dirty || horaInicio.touched)">
+            <div class="container-error-message" *ngIf="horaInicio.errors.validarMaximoHoraInicio">
+                {{horaInicio.errors.validarMaximoHoraInicio.message}}
+            </div>
+        </div>
+
+        <div class="alert-danger" *ngIf="horaFin.invalid && (horaFin.dirty || horaFin.touched)">
+            <div class="container-error-message" *ngIf="horaFin.errors.validarMaximoHoraFin">
+                {{horaFin.errors.validarMaximoHoraFin.message}}
+            </div>
+        </div>
+
+        <div class="alert-danger" *ngIf="horaFin.invalid && (horaFin.dirty || horaFin.touched)">
+            <div class="container-error-message" *ngIf="horaFin.errors.validarMinimoHoraFin">
+                {{horaFin.errors.validarMinimoHoraFin.message}}
+            </div>
+        </div>
     </form>
 </div>

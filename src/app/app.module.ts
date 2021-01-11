@@ -26,6 +26,7 @@ import { UsuariosComponent } from './_pages/usuarios/usuarios.component';
 import { ValidacionIdentificacionAsincronaDirective } from './_validaciones/validacion-identificacion-asincrona.directive';
 import { EventosComponent } from './_pages/eventos/eventos.component';
 import { MatDateFormats, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS } from '@angular/material';
+import { DatePipe } from '@angular/common';
 
 export const GRI_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -82,7 +83,8 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
     multi: true,
     },
     {provide: MAT_DATE_LOCALE, useValue: 'es-CO'},
-    {provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS}
+    {provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS},
+    {provide: DatePipe}
   ],
   bootstrap: [AppComponent]
 })

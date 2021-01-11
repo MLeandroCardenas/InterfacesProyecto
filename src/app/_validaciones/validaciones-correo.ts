@@ -6,10 +6,10 @@ export class ValidacionesCorreo {
     }
 
     static validarServidorCorreo(control: FormControl): ValidationErrors {
-        const servidorVálido = 'ucundinamarca.edu.co';
+        const servidorValido = 'ucundinamarca.edu.co';
         // tslint:disable-next-line: prefer-const
         let correo = control.value as string;
-        if (correo.endsWith(servidorVálido) === true) {
+        if (correo.endsWith(servidorValido) === true) {
             return null;
         } else {
             return {validarServidorCorreo: true};
