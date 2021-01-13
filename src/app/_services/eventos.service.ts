@@ -1,3 +1,4 @@
+import { Hora } from './../_model/Hora';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
@@ -12,6 +13,10 @@ export class EventosService {
   url: string = `${environment.HOST}v1`;
 
   constructor(private http: HttpClient) { }
+
+  obtenerHoras(HoraSeleccionada?:number) {
+    return this.http.get<Hora[]>(`${this.url}/horas/${HoraSeleccionada}`);
+  }
 
   registrarEvento(evento: Eventos) {
     return this.http.post(`${this.url}/eventos`, evento);

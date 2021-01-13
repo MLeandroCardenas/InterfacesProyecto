@@ -52,34 +52,19 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-
-                Hora inicio
-                <input type="time" formControlName="horaInicio" (change)="habilitarHoraFin()">
-
-                Hora Fin
-                <input type="time" formControlName="horaFin" (change)="minimoHoraFinMismoDia()">
-
+            <div *ngIf="isVisible">
+                <mat-radio-group formControlName="horarios">
+                    <mat-radio-button class="example-radio-button" *ngFor="let hora of listaHoras" [value]="hora">
+                        {{hora.hora}}
+                        &nbsp;
+                    </mat-radio-button>
+                </mat-radio-group>
                 &nbsp;
-
                 <button mat-icon-button type="button" style="float: initial; background-color: green;"
                     matTooltip="Agregar" [formNoValidate]="true" (click)="agregarFechas()">
                     <mat-icon>add</mat-icon>
                 </button>
-
-
-            <tr *ngFor="let evento of this.listaFechas; let i= index">
-                <td> <span>Dia: </span> {{evento.fecha}}</td>
-                &nbsp;
-                <td><span>Inicio: </span> {{evento.inicio}}</td>
-                &nbsp;
-                <td> <span>Fin: </span> {{evento.fin}}</td>
-                <td>
-                    <button mat-icon-button type="button" matTooltip="Eliminar" [formNoValidate]="true"
-                        (click)="eliminarFecha(i)">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </td>
-            </tr>
+            </div>
         </section>
         <br>
 
@@ -90,30 +75,6 @@
             <button mat-raised-button type="submit" style="background-color: #228B22; color: #000;">
                 <span>Registrar evento</span>
             </button>
-        </section>
-
-        <div class="alert-danger" *ngIf="horaInicio.invalid && (horaInicio.dirty || horaInicio.touched)">
-            <div class="container-error-message" *ngIf="horaInicio.errors.validarMinimoHoraInicio">
-                {{horaInicio.errors.validarMinimoHoraInicio.message}}
-            </div>
-        </div>
-
-        <div class="alert-danger" *ngIf="horaInicio.invalid && (horaInicio.dirty || horaInicio.touched)">
-            <div class="container-error-message" *ngIf="horaInicio.errors.validarMaximoHoraInicio">
-                {{horaInicio.errors.validarMaximoHoraInicio.message}}
-            </div>
-        </div>
-
-        <div class="alert-danger" *ngIf="horaFin.invalid && (horaFin.dirty || horaFin.touched)">
-            <div class="container-error-message" *ngIf="horaFin.errors.validarMaximoHoraFin">
-                {{horaFin.errors.validarMaximoHoraFin.message}}
-            </div>
-        </div>
-
-        <div class="alert-danger" *ngIf="horaFin.invalid && (horaFin.dirty || horaFin.touched)">
-            <div class="container-error-message" *ngIf="horaFin.errors.validarMinimoHoraFin">
-                {{horaFin.errors.validarMinimoHoraFin.message}}
-            </div>
-        </div>
+        </section>        
     </form>
 </div>
