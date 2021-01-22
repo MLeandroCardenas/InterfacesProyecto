@@ -34,6 +34,7 @@ export class EventosComponent implements OnInit {
   public maxDate = new Date();
   public listaFechas: Array<FechaEvento> = [];
   public isVisible: boolean = false;
+  public horaSeleccionada:string = null;
 
   constructor(private formBuilder: FormBuilder,
     private servicio: ZonasService,
@@ -52,8 +53,7 @@ export class EventosComponent implements OnInit {
       lugar: [this.zonasDisponibles(), Validators.required],
       nombreZona: ['', [Validators.minLength(4), Validators.maxLength(30)]],
       categoriaEvento: [this.categoriaEvento, Validators.required],
-      fecha: ['', Validators.required],
-      horarios: [null]
+      fecha: ['', Validators.required]
     });
   }
 
@@ -117,24 +117,28 @@ export class EventosComponent implements OnInit {
     this.listaFechas.splice(indice, 1);
   }
 
+  capturarHoraSeleccionada(e: any){
+    this.horaSeleccionada = e.value;
+  }
+
   agregarFechas() {
+    debugger;
     if (this.fechaEvento.value == null)
       this.mostrarMensaje('Fecha del evento obligatoria', 'Advertencia');
     else {
-      let horario = new FechaEvento();
+      let horarioEvento = new FechaEvento();
       let fecha = new Date(this.fechaEvento.value);
-      horario.fecha = fecha.toLocaleDateString();
-
-      if(this.listaFechas.length == 0)
-        this.listaFechas.push(horario);
+      horarioEvento.fecha = fecha.toLocaleDateString();
+      horarioEvento.horario = this.horaSeleccionada;
+      this.listaFechas.push(horarioEvento);
     }
   }
 
   setearValores(valor: string) {
     let evento = new Eventos();
+    evento.zona = valor;
     evento.nombre_evento = this.formEvento.get('evento').value;
     evento.descripcion = this.formEvento.get('descripcion').value;
-    evento.zona = valor;
     evento.visibilidad = this.formEvento.get('categoriaEvento').value;
     if (this.listaFechas.length == 0)
       this.mostrarMensaje('Debe agregar una fecha al evento', 'Advertencia');

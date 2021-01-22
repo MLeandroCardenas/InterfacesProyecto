@@ -53,7 +53,7 @@
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
             <div *ngIf="isVisible">
-                <mat-radio-group formControlName="horarios">
+                <mat-radio-group (change)="capturarHoraSeleccionada($event)">
                     <mat-radio-button class="example-radio-button" *ngFor="let hora of listaHoras" [value]="hora">
                         {{hora.hora}}
                         &nbsp;
@@ -65,6 +65,17 @@
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
+            <tr *ngFor="let evento of this.listaFechas; let i= index">
+                <td> <span>Dia: </span> {{evento.fecha}}</td>
+                &nbsp;
+                <td><span>Hora: </span> {{evento.horario}}</td>
+                <td>
+                    <button mat-icon-button type="button" matTooltip="Eliminar" [formNoValidate]="true"
+                        (click)="eliminarFecha(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </tr>
         </section>
         <br>
 

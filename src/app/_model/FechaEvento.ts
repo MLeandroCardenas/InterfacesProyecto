@@ -1,5 +1,5 @@
+import { Hora } from './Hora';
 export class FechaEvento {
     fecha: string;
-    inicio: string;
-    fin: string;
+    horario: string;
 }
