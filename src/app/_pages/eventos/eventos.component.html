@@ -1,38 +1,29 @@
 <div class="formulario">
     <h3>Registro evento</h3>
     <form [formGroup]="formEvento" (ngSubmit)="registrarEvento()">
-
-        <mat-form-field class="example-full-width">
-            <input matInput placeholder="Nombre evento" type="text" formControlName="evento">
-        </mat-form-field>
-
-        &nbsp;
-
-        <mat-form-field class="example-full-width">
-            <textarea matInput placeholder="Descripcion" formControlName="descripcion"></textarea>
-        </mat-form-field>
-
-        <br>
-
         <section>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Nombre evento" type="text" formControlName="evento">
+            </mat-form-field>
+
+            &nbsp;
+
+            <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="Descripcion" rows="3" cols="15"
+                    formControlName="descripcion"></textarea>
+            </mat-form-field>
+
+            &nbsp;
+
             <mat-form-field>
                 <mat-label>Lugar</mat-label>
                 <mat-select formControlName="lugar" (valueChange)="capturarSeleccion($event)">
                     <mat-option *ngFor="let zona of this.arrayZonas" [value]="zona.id">
                         {{zona.nombre_zona}}
                     </mat-option>
-                    <mat-option [value]="0">
-                        OTRA
-                    </mat-option>
                 </mat-select>
             </mat-form-field>
-            &nbsp;
 
-            <div *ngIf="seleccion == 0">
-                <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Nombre lugar" type="text" formControlName="nombreZona">
-                </mat-form-field>
-            </div>
             &nbsp;
 
             <mat-form-field>
@@ -43,15 +34,25 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-        </section>
 
-        <section>
+            &nbsp;
+
             <mat-form-field>
-                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" 
-                    placeholder="Fecha de evento" formControlName="fecha" (dateChange)="capturarFechaEvento()">
+                <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Fecha de evento"
+                    formControlName="fecha" (dateChange)="capturarFechaEvento()">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
+
+            &nbsp;
+
+            Cargar formato evento
+            <input type="file" name="fotoPerfil" accept="application/pdf" />
+            &nbsp;
+            <button mat-raised-button type="submit" style="background-color: #228B22; color: #000;">
+                <span>Guardar</span>
+            </button>
+
             <div *ngIf="isVisible">
                 <mat-radio-group (change)="capturarHoraSeleccionada($event)">
                     <mat-radio-button class="example-radio-button" *ngFor="let hora of listaHoras" [value]="hora">
@@ -59,33 +60,43 @@
                         &nbsp;
                     </mat-radio-button>
                 </mat-radio-group>
+
                 &nbsp;
+
                 <button mat-icon-button type="button" style="float: initial; background-color: green;"
                     matTooltip="Agregar" [formNoValidate]="true" (click)="agregarFechas()">
                     <mat-icon>add</mat-icon>
                 </button>
             </div>
-            <tr *ngFor="let evento of this.listaFechas; let i= index">
-                <td> <span>Dia: </span> {{evento.fecha}}</td>
-                &nbsp;
-                <td><span>Hora: </span> {{evento.horario}}</td>
+
+            <tr *ngFor="let horas of this.listaFechas; let i= index">
+                <td><span>Fecha: </span> {{horas.fecha}}</td>
+                <td><span>hora: </span> {{horas.hora}}</td>
                 <td>
-                    <button mat-icon-button type="button" matTooltip="Eliminar" [formNoValidate]="true"
-                        (click)="eliminarFecha(i)">
+                    <button mat-icon-button type="button" [formNoValidate]="true" (click)="eliminarFecha(i)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </td>
             </tr>
-        </section>
-        <br>
 
-        <section>
-            Cargar formato evento
-            <input type="file" name="fotoPerfil" accept="application/pdf" />
-            &nbsp;
-            <button mat-raised-button type="submit" style="background-color: #228B22; color: #000;">
-                <span>Registrar evento</span>
-            </button>
-        </section>        
+            <tr *ngFor="let horas of this.arrayHoras; let i= index">
+                <td><span>Hora: </span> {{horas}}</td>
+                <td>
+                    <button mat-icon-button type="button" matTooltip="Eliminar" [formNoValidate]="true"
+                        (click)="eliminarHora(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </tr>
+
+            <div *ngIf="this.arrayHoras.length !== 0">
+                <button mat-raised-button type="button" [formNoValidate]="true"
+                    style="float: initial; background-color: green;" (click)="guardarhoras()">
+                    <span>Guardar</span>
+                </button>
+            </div>
+
+        </section>
     </form>
+    <app-eventos-usuarios></app-eventos-usuarios>
 </div>

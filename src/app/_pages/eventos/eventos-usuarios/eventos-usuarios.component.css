@@ -1,0 +1,25 @@
+.example-header{
+    min-height: 64px;
+    padding: 8px 24px 0;
+}
+
+.mat-table{
+    overflow: auto;
+    max-height: 500px;
+}
+
+.mat-column-Lugar {
+    width: 25%;
+}
+
+.mat-column-Visibilidad {
+    width: 25%;
+}
+
+.mat-column-Estado {
+    width: 25%;
+}
+
+
+
+

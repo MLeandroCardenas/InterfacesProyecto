@@ -1,11 +1,11 @@
 import { UsuariosService } from './../../_services/usuarios.service';
-import { DialogoEdicionClaveComponent } from './../dialogo-edicion-clave/dialogo-edicion-clave.component';
+import { DialogoEdicionClaveComponent } from './dialogo-edicion-clave/dialogo-edicion-clave.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PerfilUsuario } from './../../_model/PerfilUsuario';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-perfil-usuario',

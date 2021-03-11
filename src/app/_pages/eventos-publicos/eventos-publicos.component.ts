@@ -24,6 +24,8 @@ export class EventosPublicosComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  cambioPagina(evento: string){}
+
   constructor(private servicio: EventosService) { }
 
   ngOnInit() {

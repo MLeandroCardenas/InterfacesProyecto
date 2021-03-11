@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Eventos } from '../_model/Eventos';
+import { Subject } from 'rxjs';
 
 
 @Injectable({
@@ -11,6 +12,7 @@ import { Eventos } from '../_model/Eventos';
 export class EventosService {
 
   url: string = `${environment.HOST}v1`;
+  refrescarTabla = new Subject<number>();
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +22,22 @@ export class EventosService {
 
   registrarEvento(evento: Eventos) {
     return this.http.post(`${this.url}/eventos`, evento);
+  }
+
+  obtenerEventosUsuario(cantidad: number) {
+    return this.http.get<any>(`${this.url}/eventos/${cantidad}`);
+  }
+
+  obtenerTodos(cantidad: number) {
+    return this.http.get<any>(`${this.url}/todos/${cantidad}`);
+  }
+
+  aprobarEvento(idEvento: number){
+    return this.http.put(`${this.url}/eventos/${idEvento}`, idEvento);
+  }
+
+  desaprobarEvento(idEvento: number){
+    return this.http.put(`${this.url}/desaprobar/${idEvento}`, idEvento);
   }
   
 }

@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import { DialogoSolicitudRecuperacionComponent } from '../dialogo-solicitud-recuperacion/dialogo-solicitud-recuperacion.component';
+import { DialogoSolicitudRecuperacionComponent } from '../reestablecer-cuenta/dialogo-solicitud-recuperacion/dialogo-solicitud-recuperacion.component';
 
 @Component({
   selector: 'app-login',

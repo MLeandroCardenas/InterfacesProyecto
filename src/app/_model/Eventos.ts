@@ -1,4 +1,3 @@
-import { FechaEvento } from './FechaEvento';
 export class Eventos {
     id: number;
     nombre_evento: string;

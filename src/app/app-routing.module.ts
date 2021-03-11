@@ -11,10 +11,11 @@ import { LoginComponent } from './_pages/login/login.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ZonasResolverGuard } from './_resolvers/zonas-resolver.guard';
-import { ConfirmacionRegistroComponent } from './_pages/confirmacion-registro/confirmacion-registro.component';
+import { ConfirmacionRegistroComponent } from './_pages/registro/confirmacion-registro/confirmacion-registro.component';
 import { ReestablecerCuentaComponent } from './_pages/reestablecer-cuenta/reestablecer-cuenta.component';
 import { UsuariosComponent } from './_pages/usuarios/usuarios.component';
 import { ZonasComponent } from './_pages/zonas/zonas.component';
+import { NotificacionesComponent } from './_pages/notificaciones/notificaciones.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -29,7 +30,9 @@ const routes: Routes = [
     {path: 'zonas', component: ZonasComponent},
     {path: 'miperfil', component: PerfilUsuarioComponent, resolve: {datosUsuario: PerfilResolverGuard}},
     {path: 'usuarios', component: UsuariosComponent},
-    {path: 'eventos', component: EventosComponent}
+    {path: 'eventos', component: EventosComponent},
+    {path: 'notificaciones', component: NotificacionesComponent}
+
   ]},
   {path: 'not404', component: Not404Component},
   {path: '**', redirectTo: 'not404', pathMatch: 'full'}

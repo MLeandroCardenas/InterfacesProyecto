@@ -21,20 +21,21 @@ export interface categorias {
 
 export class EventosComponent implements OnInit {
 
-  public formEvento: FormGroup;
+  formEvento: FormGroup;
   protected arrayZonas: Zonas[];
   protected categoriaEvento: categorias[] = [
     { valor: 'PUBLICA', nombre: 'Pública' },
     { valor: 'PRIVADA', nombre: 'Privada' },
     { valor: 'INSTITUCIONAL', nombre: 'Institucional' }
   ];
-  public listaHoras: Hora[];
-  public seleccion: number;
-  public minDate = new Date();
-  public maxDate = new Date();
-  public listaFechas: Array<FechaEvento> = [];
-  public isVisible: boolean = false;
-  public horaSeleccionada:string = null;
+  listaHoras: Hora[];
+  listaFechas: FechaEvento[] = [];
+  arrayHoras: string[] = [];
+  seleccion: number;
+  minDate = new Date();
+  maxDate = new Date();
+  isVisible: boolean = false;
+  horaSeleccionada:string = null;
 
   constructor(private formBuilder: FormBuilder,
     private servicio: ZonasService,
@@ -51,7 +52,6 @@ export class EventosComponent implements OnInit {
       evento: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
       descripcion: ['', [Validators.required, Validators.minLength(4), Validators.max(200)]],
       lugar: [this.zonasDisponibles(), Validators.required],
-      nombreZona: ['', [Validators.minLength(4), Validators.maxLength(30)]],
       categoriaEvento: [this.categoriaEvento, Validators.required],
       fecha: ['', Validators.required]
     });
@@ -111,26 +111,46 @@ export class EventosComponent implements OnInit {
       horaInicio: '',
       horaFin: ''
     });
+    this.listaFechas = [];
+    this.arrayHoras = [];
   }
 
   eliminarFecha(indice: number) {
     this.listaFechas.splice(indice, 1);
   }
 
+  eliminarHora(indice: number) {
+    this.arrayHoras.splice(indice, 1);
+  }
+
   capturarHoraSeleccionada(e: any){
-    this.horaSeleccionada = e.value;
+    this.horaSeleccionada = e.value.hora;
+  }
+
+  guardarhoras() {
+    let confirmacion = confirm('¿Desea guardar este horario?');
+    if (confirmacion) {
+      let fecha = new Date(this.fechaEvento.value).toLocaleDateString();
+      if (this.listaFechas.find(i => i.fecha === fecha))
+        this.mostrarMensaje('Debe eliminar la fecha y agregar nuevamente el horario', 'Advertencia');
+      else {
+        let evento = new FechaEvento();
+        evento.fecha = fecha;
+        evento.hora = this.arrayHoras.slice();
+        this.listaFechas.push(evento);
+        this.arrayHoras = [];
+      }
+    }
   }
 
   agregarFechas() {
-    debugger;
     if (this.fechaEvento.value == null)
       this.mostrarMensaje('Fecha del evento obligatoria', 'Advertencia');
     else {
-      let horarioEvento = new FechaEvento();
-      let fecha = new Date(this.fechaEvento.value);
-      horarioEvento.fecha = fecha.toLocaleDateString();
-      horarioEvento.horario = this.horaSeleccionada;
-      this.listaFechas.push(horarioEvento);
+      if(this.arrayHoras.find(i=> i === this.horaSeleccionada))
+        this.mostrarMensaje('Ya existe', 'Advertencia');
+      else
+        this.arrayHoras.push(this.horaSeleccionada);
     }
   }
 
@@ -143,21 +163,21 @@ export class EventosComponent implements OnInit {
     if (this.listaFechas.length == 0)
       this.mostrarMensaje('Debe agregar una fecha al evento', 'Advertencia');
     else {
-      let horarios = JSON.stringify(this.listaFechas);
-      evento.horario = horarios;
-      this.servicioEventos.registrarEvento(evento).subscribe(data => {
-        this.refrescar();
-        this.mostrarMensaje(data as string, 'Mensaje');
-        this.listaFechas = [];
-      });
+      let confirmacion = confirm('¿Desea registrar el evento?');
+      if(confirmacion){
+        let horarios = JSON.stringify(this.listaFechas);
+        evento.horario = horarios;
+        this.servicioEventos.registrarEvento(evento).subscribe(data => {
+          this.mostrarMensaje(data as string, 'Mensaje');
+          this.refrescar();
+          this.servicioEventos.refrescarTabla.next(5);
+        });
+      } 
     }
   }
   
   registrarEvento() {
     if (this.formEvento.valid) {
-      if (this.seleccion == 0)
-        this.setearValores(this.formEvento.get('nombreZona').value);
-      else
         this.setearValores(this.formEvento.get('lugar').value);
     } else
       this.mostrarMensaje('Debe rellenar todos los campos', 'Advertencia');

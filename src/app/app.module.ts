@@ -18,15 +18,20 @@ import { Not404Component } from './_pages/not404/not404.component';
 import { ZonasComponent } from './_pages/zonas/zonas.component';
 import { LectoresComponent } from './_pages/lectores/lectores.component';
 import { PerfilUsuarioComponent } from './_pages/perfil-usuario/perfil-usuario.component';
-import { DialogoEdicionClaveComponent } from './_pages/dialogo-edicion-clave/dialogo-edicion-clave.component';
-import { ConfirmacionRegistroComponent } from './_pages/confirmacion-registro/confirmacion-registro.component';
+import { DialogoEdicionClaveComponent } from './_pages/perfil-usuario/dialogo-edicion-clave/dialogo-edicion-clave.component';
+import { ConfirmacionRegistroComponent } from './_pages/registro/confirmacion-registro/confirmacion-registro.component';
 import { ReestablecerCuentaComponent } from './_pages/reestablecer-cuenta/reestablecer-cuenta.component';
-import { DialogoSolicitudRecuperacionComponent } from './_pages/dialogo-solicitud-recuperacion/dialogo-solicitud-recuperacion.component';
+import { DialogoSolicitudRecuperacionComponent } from './_pages/reestablecer-cuenta/dialogo-solicitud-recuperacion/dialogo-solicitud-recuperacion.component';
 import { UsuariosComponent } from './_pages/usuarios/usuarios.component';
 import { ValidacionIdentificacionAsincronaDirective } from './_validaciones/validacion-identificacion-asincrona.directive';
 import { EventosComponent } from './_pages/eventos/eventos.component';
 import { MatDateFormats, MAT_DATE_LOCALE, MAT_NATIVE_DATE_FORMATS } from '@angular/material';
 import { DatePipe } from '@angular/common';
+import { EventosUsuariosComponent } from './_pages/eventos/eventos-usuarios/eventos-usuarios.component';
+import { DialogoDescripcionEventoComponent } from './_pages/eventos/dialogo-descripcion-evento/dialogo-descripcion-evento.component';
+import { DialogoHorariosEventoComponent } from './_pages/eventos/dialogo-horarios-evento/dialogo-horarios-evento.component';
+import { NotificacionesComponent } from './_pages/notificaciones/notificaciones.component';
+import { EventosRegistradosComponent } from './_pages/notificaciones/eventos-registrados/eventos-registrados.component';
 
 export const GRI_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -62,11 +67,18 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
     DialogoSolicitudRecuperacionComponent,
     UsuariosComponent,
     ValidacionIdentificacionAsincronaDirective,
-    EventosComponent
+    EventosComponent,
+    EventosUsuariosComponent,
+    DialogoDescripcionEventoComponent,
+    DialogoHorariosEventoComponent,
+    NotificacionesComponent,
+    EventosRegistradosComponent
   ],
   entryComponents: [
     DialogoEdicionClaveComponent,
-    DialogoSolicitudRecuperacionComponent
+    DialogoSolicitudRecuperacionComponent,
+    DialogoDescripcionEventoComponent,
+    DialogoHorariosEventoComponent
   ],
   imports: [
     BrowserModule,

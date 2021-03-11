@@ -14,7 +14,7 @@ export class UsuariosComponent implements OnInit {
   dataSource = new MatTableDataSource<Usuario>();
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
-  public cantidad: number = 5;
+  cantidad: number = 5;
 
   constructor(private servicio: UsuariosService) { }
 

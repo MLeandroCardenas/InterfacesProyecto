@@ -1,65 +1,67 @@
-<mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Usuario">
-</mat-form-field>
-
-<mat-table [dataSource]="dataSource" matSort>
-
-    <div [hidden]="true">
-        <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+<div class="example-header"> 
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar Usuario">
+    </mat-form-field>
+    
+    <mat-table [dataSource]="dataSource" matSort>
+    
+        <div [hidden]="true">
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+            </ng-container>
+        </div>
+    
+        <ng-container matColumnDef="Apellidos">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.apellidos}} </mat-cell>
         </ng-container>
-    </div>
-
-    <ng-container matColumnDef="Apellidos">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.apellidos}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Nombres">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.nombres}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Identificacion">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Identificacion </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.identificacion}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Rol">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Rol </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.rol}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Estado">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.estado}} </mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="Acciones">
-        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-        <mat-cell *matCellDef="let row">
-
-            <div *ngIf="row.estado === 'DESHABILITADO'">
-                <button mat-button (click)="habilitarUsuario(row.id)" matTooltip="Habilitar">
-                    <mat-icon>check</mat-icon>
-                </button>
-            </div>
-
-            <div *ngIf="row.estado === 'HABILITADO'">
-                <button mat-button (click)="deshabilitarUsuario(row.id)" matTooltip="Deshabilitar">
-                    <mat-icon>cancel</mat-icon>
-                </button>
-            </div>
-        </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
-<mat-paginator 
-    [pageSize]="5" 
-    [pageSizeOptions]="[5, 10, 15, 30, 100]"
-    [length]="cantidad"
-    (page)="cambioPagina($event)">
-</mat-paginator>
+    
+        <ng-container matColumnDef="Nombres">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nombres </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.nombres}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Identificacion">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Identificacion </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.identificacion}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Rol">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Rol </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.rol}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Estado">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Estado </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.estado}} </mat-cell>
+        </ng-container>
+    
+        <ng-container matColumnDef="Acciones">
+            <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+            <mat-cell *matCellDef="let row">
+    
+                <div *ngIf="row.estado === 'DESHABILITADO'">
+                    <button mat-button (click)="habilitarUsuario(row.id)" matTooltip="Habilitar">
+                        <mat-icon>check</mat-icon>
+                    </button>
+                </div>
+    
+                <div *ngIf="row.estado === 'HABILITADO'">
+                    <button mat-button (click)="deshabilitarUsuario(row.id)" matTooltip="Deshabilitar">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </div>
+            </mat-cell>
+        </ng-container>
+    
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator 
+        [pageSize]="5" 
+        [pageSizeOptions]="[5, 10, 15, 30, 100]"
+        [length]="cantidad"
+        (page)="cambioPagina($event)">
+    </mat-paginator>
+</div>

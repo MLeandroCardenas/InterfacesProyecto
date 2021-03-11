@@ -1,5 +1,5 @@
-import { Clave } from './../../_model/Clave';
-import { UsuariosService } from './../../_services/usuarios.service';
+import { Clave } from '../../../_model/Clave';
+import { UsuariosService } from '../../../_services/usuarios.service';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatSnackBar } from '@angular/material';
