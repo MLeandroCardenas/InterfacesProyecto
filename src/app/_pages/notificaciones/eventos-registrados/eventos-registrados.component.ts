@@ -22,16 +22,13 @@ export class EventosRegistradosComponent implements OnInit {
 
   ngOnInit() {
     this.cargarInfo(this.cantidad);
-    this.servicio.refrescarTabla.subscribe( data => {
-      this.cargarInfo(data);
-    });
   }
 
   cargarInfo(total: number) {
     this.servicio.obtenerTodos(total).subscribe(data => {
-      this.cantidad = data.total;
-      this.dataSource = new MatTableDataSource(data.data);
-      this.dataSource.sort = this.sort;
+        this.cantidad = data.total;
+        this.dataSource = new MatTableDataSource(data.data);
+        this.dataSource.sort = this.sort;
     });
   }
 

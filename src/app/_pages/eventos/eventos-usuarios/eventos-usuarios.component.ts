@@ -1,7 +1,7 @@
 import { Eventos } from '../../../_model/Eventos';
 import { EventosService } from '../../../_services/eventos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { DialogoDescripcionEventoComponent } from '../dialogo-descripcion-evento/dialogo-descripcion-evento.component';
 import { DialogoHorariosEventoComponent } from '../dialogo-horarios-evento/dialogo-horarios-evento.component';
 
@@ -17,8 +17,8 @@ export class EventosUsuariosComponent implements OnInit {
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
   cantidad: number = 5;
-
-  constructor(private servicio: EventosService, private dialog: MatDialog) { }
+  
+  constructor(private servicio: EventosService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.cargarInfo(this.cantidad);
@@ -43,9 +43,19 @@ export class EventosUsuariosComponent implements OnInit {
 
   cargarInfo(total: number) {
     this.servicio.obtenerEventosUsuario(total).subscribe(data => {
-      this.cantidad = data.total;
-      this.dataSource = new MatTableDataSource(data.data);
-      this.dataSource.sort = this.sort;
+      if(data === null)
+        this.mostrarMensaje('No hay eventos', 'Advertencia');
+      else {
+        this.cantidad = data.total;
+        this.dataSource = new MatTableDataSource(data.data);
+        this.dataSource.sort = this.sort;
+      }
+    });
+  }
+
+  mostrarMensaje(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
     });
   }
 

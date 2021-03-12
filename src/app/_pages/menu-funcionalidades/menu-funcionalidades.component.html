@@ -83,11 +83,12 @@
         <mat-divider></mat-divider>
       </div>
 
-
-      <button mat-menu-item style="cursor: pointer" routerLink="./notificaciones" (click)="sidenav.opened = false">
-        <mat-icon>notifications</mat-icon>
-        <span>Notificaciones</span>
-      </button>
+      <div *ngIf="rolUsuario === 'Administrador'">
+        <button mat-menu-item style="cursor: pointer" routerLink="./notificaciones" (click)="sidenav.opened = false">
+          <mat-icon>notifications</mat-icon>
+          <span>Notificaciones</span>
+        </button>
+      </div>
 
     </mat-sidenav>
     <mat-sidenav-content>
