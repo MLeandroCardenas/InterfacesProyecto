@@ -4,7 +4,6 @@ import { Eventos } from 'src/app/_model/Eventos';
 import { EventosService } from 'src/app/_services/eventos.service';
 import { DialogoDescripcionEventoComponent } from '../../eventos/dialogo-descripcion-evento/dialogo-descripcion-evento.component';
 import { DialogoHorariosEventoComponent } from '../../eventos/dialogo-horarios-evento/dialogo-horarios-evento.component';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-eventos-registrados',
@@ -18,7 +17,6 @@ export class EventosRegistradosComponent implements OnInit {
   @ViewChild(MatSort, { static : true }) sort: MatSort;
   cantidad: number = 5;
   
-
   constructor(private servicio: EventosService,
               private dialog: MatDialog,
               private snackBar: MatSnackBar) { }

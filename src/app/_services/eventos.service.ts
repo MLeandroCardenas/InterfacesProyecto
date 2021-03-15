@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Eventos } from '../_model/Eventos';
-import { webSocket } from 'rxjs/webSocket';
 import { Subject } from 'rxjs';
 
 
@@ -14,7 +13,7 @@ export class EventosService {
 
   url: string = `${environment.HOST}v1`;
   refrescarTabla = new Subject<number>();
-  
+
   constructor(private http: HttpClient) { }
 
   obtenerHoras(HoraSeleccionada?:number) {
