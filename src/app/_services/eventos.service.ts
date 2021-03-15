@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { Eventos } from '../_model/Eventos';
 import { Subject } from 'rxjs';
 
-
 @Injectable({
   providedIn: 'root'
 })

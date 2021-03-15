@@ -48,17 +48,13 @@ export class EventosRegistradosComponent implements OnInit {
   }
 
   aprobarEvento(idEvento: number){
-    this.servicio.aprobarEvento(idEvento).subscribe(data => {
-      this.mostrarMensaje(data as string, 'Mensaje');
-      this.cargarInfo(this.cantidad);
-    });
-  }
-
-  desaprobarEvento(idEvento: number){
-    this.servicio.desaprobarEvento(idEvento).subscribe(data => {
-      this.mostrarMensaje(data as string, 'Mensaje');
-      this.cargarInfo(this.cantidad);
-    });
+    let confirmacion = confirm('¿Esta seguro que desea aprobar el evento?');
+    if(confirmacion){
+      this.servicio.aprobarEvento(idEvento).subscribe(data => {
+        this.mostrarMensaje(data as string, 'Mensaje');
+        this.cargarInfo(this.cantidad);
+      });
+    }
   }
 
   mostrarMensaje(message: string, action: string) {

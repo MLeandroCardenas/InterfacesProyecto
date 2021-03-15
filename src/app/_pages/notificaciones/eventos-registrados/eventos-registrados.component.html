@@ -50,12 +50,6 @@
                     <mat-icon>pageview</mat-icon>
                 </button>
 
-                <div *ngIf="row.estado === 'HABILITADO'">
-                    <button mat-button (click)="desaprobarEvento(row.id)" matTooltip="Deshabilitar evento">
-                        <mat-icon>cancel</mat-icon>
-                    </button>
-                </div>
-
                 <div *ngIf="row.estado === 'CREADO'">
                     <button mat-button (click)="aprobarEvento(row.id)" matTooltip="Habilitar evento">
                         <mat-icon>done</mat-icon>
