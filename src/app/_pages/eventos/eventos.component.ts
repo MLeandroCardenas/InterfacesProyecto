@@ -153,7 +153,7 @@ export class EventosComponent implements OnInit {
         this.arrayHoras.push(this.horaSeleccionada);
     }
   }
-
+  
   setearValores(valor: string) {
     let evento = new Eventos();
     evento.zona = valor;
