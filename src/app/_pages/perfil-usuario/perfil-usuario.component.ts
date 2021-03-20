@@ -22,6 +22,8 @@ export class PerfilUsuarioComponent implements OnInit {
 
   protected usuario = new PerfilUsuario();
   formFoto: FormGroup;
+  trueImg: boolean = false;
+  myImg: string;   
 
   iniciarFormulario() {
     this.formFoto = this.formBuilder.group({
@@ -37,6 +39,15 @@ export class PerfilUsuarioComponent implements OnInit {
   cargarInformacion() {
     this.route.data.subscribe((datos: { datosUsuario: PerfilUsuario }) => {
       this.usuario = datos.datosUsuario;
+      if(this.usuario.foto === null)
+        this.trueImg = false;
+      else {
+        this.servicioUsuario.obtenerFotoUsuario(this.usuario.foto).subscribe(data => {
+          this.myImg = data;
+          console.log('Imagen ' + this.myImg);
+          this.trueImg = true;
+        });
+      }
     });
   }
 
@@ -46,20 +57,13 @@ export class PerfilUsuarioComponent implements OnInit {
     });
   }
 
-  capturarFoto(event) {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
-      this.formFoto.get('fotoPerfil').setValue(file);
-    }
-  }
-
-  subir() {
-    if (this.formFoto.invalid)
-      alert('Seleccione un archivo');
-    else {
-      const formData = new FormData();
-      formData.append('foto', this.formFoto.get('fotoPerfil').value);
-      this.servicioUsuario.cambiarFotoPerfil(formData).subscribe(data => {
+  capturarFoto(event: any) {
+    let img = event.target;
+    if(img.files.length > 0){
+      let form = new FormData();
+      form.append('foto',img.files[0]);
+      this.servicioUsuario.subirFoto(form).subscribe( data => {
+        this.cargarInformacion();
         this.mostrarMensaje(data as string, 'Mensaje');
       });
     }

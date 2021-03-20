@@ -1,13 +1,12 @@
 <div class="foto-opciones">
-    <form [formGroup]="formFoto" (ngSubmit)="subir()">
-        <img src="" width="80" height="80"><br>
-        <input type="file" name="fotoPerfil" accept="image/jpg, image/jpeg"
-            (change)="capturarFoto($event)"/>
-        <br><br>
-        <button type="submit" mat-button style="float: none; background-color: green;">
-            <span>Guardar fotografia</span>
-            <mat-icon>cloud_upload</mat-icon>
-        </button>
+    <form [formGroup]="formFoto">
+
+        <div *ngIf = "trueImg">
+            <img src = {{myImg}} width="90" height="90" alt="foto"><br>
+        </div>
+
+        <h4>Subir foto de perfil</h4> &nbsp;
+        <input type="file" name="fotoPerfil" accept="image/jpg,jpeg"(change)="capturarFoto($event)"/>
         <br>
     </form>
 </div>
