@@ -5,12 +5,18 @@
     
     <mat-table [dataSource]="dataSource" matSort>
     
-        <div [hidden]="true">
-            <ng-container matColumnDef="id">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
-            </ng-container>
-        </div>
+        <ng-container matColumnDef="Foto">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Foto </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <div *ngIf="element.foto !== null">
+                    <img [src]="urFotos+element.foto" width="90" height="90" alt="foto" /> 
+                </div>
+
+                <div *ngIf="element.foto === null">
+                    <img [src]="rutaImagenDefecto" width="90" height="90" alt="foto" />
+                </div>
+            </mat-cell>
+        </ng-container>
     
         <ng-container matColumnDef="Apellidos">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Apellidos </mat-header-cell>

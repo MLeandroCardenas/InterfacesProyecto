@@ -10,11 +10,13 @@ import { MatSort, MatTableDataSource } from '@angular/material';
 })
 export class UsuariosComponent implements OnInit {
 
-  displayedColumns: string[] = ['Apellidos', 'Nombres', 'Identificacion', 'Rol', 'Estado', 'Acciones'];
+  displayedColumns: string[] = ['Foto', 'Apellidos', 'Nombres', 'Identificacion', 'Rol', 'Estado', 'Acciones'];
   dataSource = new MatTableDataSource<Usuario>();
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
   cantidad: number = 5;
+  urFotos: string = 'http://127.0.0.1:8000/storage/usuarios/';
+  rutaImagenDefecto: string = './assets/img/img_defecto.gif'; 
 
   constructor(private servicio: UsuariosService) { }
 
@@ -37,6 +39,7 @@ export class UsuariosComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
+
 
   habilitarUsuario(idUsuario: number) {
   }
