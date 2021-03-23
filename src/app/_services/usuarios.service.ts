@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Clave } from './../_model/Clave';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -21,6 +22,10 @@ export class UsuariosService {
 
   obtenerFotoUsuario(foto: string){
     return this.http.get<any>(`${this.url}/foto/${foto}`);
+  }
+
+  obtenerFotoActualizada(){
+    return this.http.get<any>(`${this.url}/actual`);
   }
 
   todos(cantidad: number) {

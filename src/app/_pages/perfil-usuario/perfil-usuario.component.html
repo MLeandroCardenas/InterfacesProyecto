@@ -1,11 +1,8 @@
 <div class="foto-opciones">
-    <form [formGroup]="formFoto">
-
-        <div *ngIf = "trueImg">
-            <img src = {{myImg}} width="90" height="90" alt="foto"><br>
-        </div>
-
-        <h4>Subir foto de perfil</h4> &nbsp;
+    <form>
+        <img [src]="myImg" width="90" height="90" alt="foto">
+        <br>
+        &nbsp;
         <input type="file" name="fotoPerfil" accept="image/jpg,jpeg"(change)="capturarFoto($event)"/>
         <br>
     </form>

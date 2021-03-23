@@ -4,4 +4,5 @@ export class PerfilUsuario {
     identificacion: number;
     foto: string;
     rol: string;
+    id_user: number;
 }

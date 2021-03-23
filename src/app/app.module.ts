@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistroComponent } from './_pages/registro/registro.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { EventosPublicosComponent } from './_pages/eventos-publicos/eventos-publicos.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuPrincipalComponent } from './_pages/menu-principal/menu-principal.component';
 import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
 import { ValidacionCorreoAsincronaDirective } from './_validaciones/validacion-correo-asincrona.directive';
@@ -72,7 +72,7 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
     DialogoDescripcionEventoComponent,
     DialogoHorariosEventoComponent,
     NotificacionesComponent,
-    EventosRegistradosComponent
+    EventosRegistradosComponent  
   ],
   entryComponents: [
     DialogoEdicionClaveComponent,
@@ -87,6 +87,7 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
     MaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule
   ],
   providers: [
     {
