@@ -36,6 +36,7 @@ export class EventosComponent implements OnInit {
   maxDate = new Date();
   isVisible: boolean = false;
   horaSeleccionada:string = null;
+  archivo:File;
 
   constructor(private formBuilder: FormBuilder,
     private servicio: ZonasService,
@@ -153,6 +154,12 @@ export class EventosComponent implements OnInit {
         this.arrayHoras.push(this.horaSeleccionada);
     }
   }
+
+  cargarArchivo(event: any){
+    let img = event.target;
+    if(img.files.length > 0)
+      this.archivo = img.files[0];
+  }
   
   setearValores(valor: string) {
     let evento = new Eventos();
@@ -165,12 +172,17 @@ export class EventosComponent implements OnInit {
     else {
       let confirmacion = confirm('¿Desea registrar el evento?');
       if(confirmacion){
+        let form = new FormData();
+        if(this.archivo !== undefined){
+          form.append('certificado',this.archivo);
+          //evento.certificado = form; 
+        }
         let horarios = JSON.stringify(this.listaFechas);
         evento.horario = horarios;
         this.servicioEventos.registrarEvento(evento).subscribe(data => {
-          this.mostrarMensaje(data as string, 'Mensaje');
           this.refrescar();
           this.servicioEventos.refrescarTabla.next(5);
+          this.mostrarMensaje(data as string, 'Mensaje');
         });
       } 
     }

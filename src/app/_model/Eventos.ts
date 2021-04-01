@@ -5,5 +5,5 @@ export class Eventos {
     zona: string;
     visibilidad: string;
     horario: string;
-    certificado: string;
+    certificado: FormData;
 }
