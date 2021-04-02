@@ -36,13 +36,15 @@
                     <mat-icon>access_time_filled</mat-icon>
                 </button>
 
-                <button mat-button matTooltip="Ver certificado">
-                    <mat-icon>pageview</mat-icon>
-                </button>
-
                 <div *ngIf="row.estado === 'HABILITADO'">
                     <button mat-button matTooltip="Enviar invitaciones">
                         <mat-icon>insert_invitation</mat-icon>
+                    </button>
+                </div>
+
+                <div *ngIf="row.certificado !== null">
+                    <button mat-button matTooltip="Ver certificado" (click)="obtenerCertificado(row.certificado)" target="_blank">
+                        <mat-icon>preview</mat-icon>
                     </button>
                 </div>
 

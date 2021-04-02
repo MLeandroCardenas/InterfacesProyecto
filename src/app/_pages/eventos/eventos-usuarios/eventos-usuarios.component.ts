@@ -53,6 +53,11 @@ export class EventosUsuariosComponent implements OnInit {
     });
   }
 
+  obtenerCertificado(nombre: string){
+    this.servicio.visualizarCertificado(nombre).subscribe(()=>{
+    });
+  }
+
   mostrarMensaje(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,

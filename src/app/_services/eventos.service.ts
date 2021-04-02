@@ -23,6 +23,14 @@ export class EventosService {
     return this.http.post(`${this.url}/eventos`, evento);
   }
 
+  subirCertificado(idEvento: any, archivo:any) {
+    return this.http.post(`${this.url}/certificados/${idEvento}`, archivo);
+  }
+
+  visualizarCertificado(nombre:string){
+    return this.http.get<any>(`${this.url}/certificado/${nombre}`);
+  }
+
   obtenerEventosUsuario(cantidad: number) {
     return this.http.get<any>(`${this.url}/eventos/${cantidad}`);
   }

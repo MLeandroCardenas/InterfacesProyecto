@@ -7,6 +7,7 @@ import { Zonas } from './../../_model/Zonas';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Eventos } from 'src/app/_model/Eventos';
+import { forkJoin } from 'rxjs';
 
 export interface categorias {
   valor: string;
@@ -162,28 +163,35 @@ export class EventosComponent implements OnInit {
   }
   
   setearValores(valor: string) {
-    let evento = new Eventos();
-    evento.zona = valor;
-    evento.nombre_evento = this.formEvento.get('evento').value;
-    evento.descripcion = this.formEvento.get('descripcion').value;
-    evento.visibilidad = this.formEvento.get('categoriaEvento').value;
     if (this.listaFechas.length == 0)
       this.mostrarMensaje('Debe agregar una fecha al evento', 'Advertencia');
     else {
       let confirmacion = confirm('¿Desea registrar el evento?');
       if(confirmacion){
-        let form = new FormData();
-        if(this.archivo !== undefined){
-          form.append('certificado',this.archivo);
-          //evento.certificado = form; 
-        }
+        let evento = new Eventos();
         let horarios = JSON.stringify(this.listaFechas);
+        evento.zona = valor;
+        evento.nombre_evento = this.formEvento.get('evento').value;
+        evento.descripcion = this.formEvento.get('descripcion').value;
+        evento.visibilidad = this.formEvento.get('categoriaEvento').value;
         evento.horario = horarios;
-        this.servicioEventos.registrarEvento(evento).subscribe(data => {
-          this.refrescar();
-          this.servicioEventos.refrescarTabla.next(5);
-          this.mostrarMensaje(data as string, 'Mensaje');
-        });
+        if(this.archivo !== undefined){
+          let form = new FormData();
+          form.append('certificado',this.archivo);
+          this.servicioEventos.registrarEvento(evento).subscribe(data => {
+            this.refrescar();
+            this.servicioEventos.refrescarTabla.next(5);
+            this.servicioEventos.subirCertificado(data,form).subscribe(()=>{
+              this.mostrarMensaje('Evento registrado exitosamente', 'Mensaje');
+            });
+          });
+        } else {
+          this.servicioEventos.registrarEvento(evento).subscribe(() => {
+            this.refrescar();
+            this.servicioEventos.refrescarTabla.next(5);
+            this.mostrarMensaje('Evento registrado exitosamente', 'Mensaje');
+          });
+        }
       } 
     }
   }
