@@ -43,11 +43,11 @@
                 </div>
 
                 <div *ngIf="row.certificado !== null">
-                    <button mat-button matTooltip="Ver certificado" (click)="obtenerCertificado(row.certificado)" target="_blank">
+                    <button mat-button matTooltip="Ver certificado" (click)="obtenerCertificado(row.certificado)">
                         <mat-icon>preview</mat-icon>
                     </button>
                 </div>
-
+        
             </mat-cell>
         </ng-container>
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

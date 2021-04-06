@@ -17,6 +17,7 @@ export class EventosUsuariosComponent implements OnInit {
   @ViewChild(MatSort, { static : true }) sort: MatSort;
 
   cantidad: number = 5;
+  pathArchivo: any;
   
   constructor(private servicio: EventosService, private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
@@ -54,8 +55,9 @@ export class EventosUsuariosComponent implements OnInit {
   }
 
   obtenerCertificado(nombre: string){
-    this.servicio.visualizarCertificado(nombre).subscribe(()=>{
-    });
+   this.servicio.visualizarCertificado(nombre).subscribe(data=>{
+     window.open(data, '_blank');
+   });
   }
 
   mostrarMensaje(message: string, action: string) {
