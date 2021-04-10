@@ -8,16 +8,19 @@
     max-height: 500px;
 }
 
-.mat-column-Lugar {
-    width: 25%;
+.mat-column-Estado {
+    flex: 0 0 10% !important;
+    width: 10%;
 }
 
 .mat-column-Visibilidad {
-    width: 25%;
+    flex: 0 0 10% !important;
+    width: 10%;
 }
 
-.mat-column-Estado {
-    width: 25%;
+.mat-column-Lugar {
+    flex: 0 0 10% !important;
+    width: 60%;
 }
 
 

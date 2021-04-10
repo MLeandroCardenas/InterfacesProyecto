@@ -27,6 +27,7 @@
     
         <ng-container matColumnDef="Acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+
             <mat-cell *matCellDef="let row">
                 <button mat-button (click)="descripcionEvento(row.descripcion)" matTooltip="Ver descripcion">
                     <mat-icon>description</mat-icon>
@@ -35,6 +36,24 @@
                 <button mat-button (click)="horarioEvento(row.horario)" matTooltip="Ver Horarios">
                     <mat-icon>access_time_filled</mat-icon>
                 </button>
+
+                <div *ngIf="row.estado === 'CREADO'">
+                    <button mat-button matTooltip="Eliminar evento">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+
+                <div *ngIf="row.estado === 'CREADO'">
+                    <button mat-button matTooltip="editar evento">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                </div>
+
+                <div *ngIf="row.estado === 'CREADO'">
+                    <button mat-button matTooltip="Enviar a revisión">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </div>
 
                 <div *ngIf="row.estado === 'HABILITADO'">
                     <button mat-button matTooltip="Enviar invitaciones">
