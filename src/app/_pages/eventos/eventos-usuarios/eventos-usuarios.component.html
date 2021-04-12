@@ -38,7 +38,7 @@
                 </button>
 
                 <div *ngIf="row.estado === 'CREADO'">
-                    <button mat-button matTooltip="Eliminar evento">
+                    <button mat-button matTooltip="Eliminar evento" (click)="eliminarEvento(row.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>
@@ -50,7 +50,7 @@
                 </div>
 
                 <div *ngIf="row.estado === 'CREADO'">
-                    <button mat-button matTooltip="Enviar a revisión">
+                    <button mat-button matTooltip="Enviar a revisión" (click)="solicitarAprobacion(row.id)">
                         <mat-icon>send</mat-icon>
                     </button>
                 </div>
@@ -61,11 +61,13 @@
                     </button>
                 </div>
 
+                <!--
                 <div *ngIf="row.certificado !== null">
                     <button mat-button matTooltip="Ver certificado" (click)="obtenerCertificado(row.certificado)">
                         <mat-icon>preview</mat-icon>
                     </button>
                 </div>
+                -->
         
             </mat-cell>
         </ng-container>

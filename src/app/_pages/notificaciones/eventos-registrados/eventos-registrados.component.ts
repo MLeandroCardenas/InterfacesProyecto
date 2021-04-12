@@ -57,6 +57,20 @@ export class EventosRegistradosComponent implements OnInit {
     }
   }
 
+  descartarEvento(idEvento: number){
+    let confirmacion = confirm('¿Esta seguro que desea descartar el evento?');
+    if(confirmacion){
+      let comentario = prompt('Observación','leído');
+      let objeto = {
+        comentario: comentario
+      }  
+      this.servicio.desaprobarEvento(idEvento,objeto).subscribe(data => {
+        this.mostrarMensaje(data as string, 'Mensaje');
+        this.cargarInfo(this.cantidad);
+      });
+    }
+  }
+
   mostrarMensaje(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,

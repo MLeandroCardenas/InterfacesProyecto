@@ -60,6 +60,20 @@ export class EventosUsuariosComponent implements OnInit {
    });
   }
 
+  eliminarEvento(idEvento: number){
+    this.servicio.eliminarEvento(idEvento).subscribe(data=>{
+      this.mostrarMensaje(data as string, 'Mensaje');
+      this.servicio.refrescarTabla.next(5);
+    });
+  }
+
+  solicitarAprobacion(idEvento: number){
+    this.servicio.solicitarAprobacion(idEvento).subscribe(data=>{
+      this.mostrarMensaje(data as string, 'Mensaje');
+      this.servicio.refrescarTabla.next(5);
+    });
+  }
+
   mostrarMensaje(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 3000,

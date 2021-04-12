@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Eventos } from '../_model/Eventos';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +43,16 @@ export class EventosService {
     return this.http.put(`${this.url}/eventos/${idEvento}`, idEvento);
   }
 
-  desaprobarEvento(idEvento: number){
-    return this.http.put(`${this.url}/desaprobar/${idEvento}`, idEvento);
+  desaprobarEvento(idEvento: number, comentario: any){
+    return this.http.post(`${this.url}/desaprobar/${idEvento}`,comentario);
+  }
+
+  eliminarEvento(idEvento: number){
+    return this.http.delete(`${this.url}/evento/${idEvento}`);
+  }
+
+  solicitarAprobacion(idEvento: number){
+    return this.http.patch(`${this.url}/notificacionEvento/${idEvento}`,idEvento);
   }
   
 }

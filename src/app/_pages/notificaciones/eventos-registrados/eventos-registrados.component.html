@@ -38,21 +38,29 @@
         <ng-container matColumnDef="acciones">
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
             <mat-cell *matCellDef="let row">
-                <button mat-button (click)="descripcionEvento(row.descripcion)" matTooltip="Ver descripcion">
+                <button mat-button (click)="descripcionEvento(row.descripcion)" matTooltip="Descripcion">
                     <mat-icon>description</mat-icon>
                 </button>
 
-                <button mat-button (click)="horarioEvento(row.horario)" matTooltip="Ver Horarios">
+                <button mat-button (click)="horarioEvento(row.horario)" matTooltip="Horarios">
                     <mat-icon>access_time_filled</mat-icon>
                 </button>
 
+                <!--
                 <button mat-button matTooltip="Ver certificado">
                     <mat-icon>pageview</mat-icon>
                 </button>
+                -->
 
-                <div *ngIf="row.estado === 'CREADO'">
-                    <button mat-button (click)="aprobarEvento(row.id)" matTooltip="Habilitar evento">
+                <div *ngIf="row.estado === 'PENDIENTE'">
+                    <button mat-button (click)="aprobarEvento(row.id)" matTooltip="Aprobar">
                         <mat-icon>done</mat-icon>
+                    </button>
+                </div>
+
+                <div *ngIf="row.estado === 'PENDIENTE'">
+                    <button mat-button (click)="descartarEvento(row.id)" matTooltip="Descartar">
+                        <mat-icon>cancel</mat-icon>
                     </button>
                 </div>
 
