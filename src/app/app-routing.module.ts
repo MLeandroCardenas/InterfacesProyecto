@@ -5,7 +5,7 @@ import { PerfilUsuarioComponent } from './_pages/perfil-usuario/perfil-usuario.c
 import { Not404Component } from './_pages/not404/not404.component';
 import { CanActivateGuard } from './_guardas/can-activate.guard';
 import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
-import { EventosPublicosComponent } from './_pages/eventos-publicos/eventos-publicos.component';
+import { EventosPublicosComponent } from './_pages/eventos/eventos-publicos/eventos-publicos.component';
 import { RegistroComponent } from './_pages/registro/registro.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { NgModule } from '@angular/core';
@@ -16,6 +16,7 @@ import { ReestablecerCuentaComponent } from './_pages/reestablecer-cuenta/reesta
 import { UsuariosComponent } from './_pages/usuarios/usuarios.component';
 import { ZonasComponent } from './_pages/zonas/zonas.component';
 import { NotificacionesComponent } from './_pages/notificaciones/notificaciones.component';
+import { PeticionesComponent } from './_pages/peticiones/peticiones.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
@@ -31,8 +32,8 @@ const routes: Routes = [
     {path: 'miperfil', component: PerfilUsuarioComponent, resolve: {datosUsuario: PerfilResolverGuard}},
     {path: 'usuarios', component: UsuariosComponent},
     {path: 'eventos', component: EventosComponent},
-    {path: 'notificaciones', component: NotificacionesComponent}
-
+    {path: 'notificaciones', component: NotificacionesComponent},
+    {path: 'peticiones', component: PeticionesComponent}
   ]},
   {path: 'not404', component: Not404Component},
   {path: '**', redirectTo: 'not404', pathMatch: 'full'}

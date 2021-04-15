@@ -1,0 +1,33 @@
+<div class="formulario">
+    <h3>Registro evento</h3>
+    <form [formGroup]="formularioPeticion" (ngSubmit)="registrarPeticion()">
+        <section>
+            <mat-form-field>
+                <mat-label>Tipo de peticion</mat-label>
+                <mat-select formControlName="tipoPeticion">
+                    <mat-option *ngFor="let tipo of this.tiposPeticiones" [value]="tipo.id">
+                        {{tipo.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            &nbsp;
+            <mat-form-field class="example-full-width">
+                <textarea matInput placeholder="Comentario" rows="5" cols="10"
+                    formControlName="comentario"></textarea>
+            </mat-form-field>
+            &nbsp;
+
+            <span>Cargar documentos </span>
+            <input type="file" name="documentos" accept="application/pdf" formControlName="archivos" multiple/> 
+            &nbsp;
+            
+            <button mat-raised-button type="submit" style="background-color: #228B22; color: #000;">
+                <span>Guardar</span>
+            </button>
+        </section>
+    </form>
+
+    <h3>Notificaciones</h3>
+    
+</div>

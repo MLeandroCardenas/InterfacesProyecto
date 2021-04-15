@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistroComponent } from './_pages/registro/registro.component';
 import { LoginComponent } from './_pages/login/login.component';
-import { EventosPublicosComponent } from './_pages/eventos-publicos/eventos-publicos.component';
+import { EventosPublicosComponent } from './_pages/eventos/eventos-publicos/eventos-publicos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuPrincipalComponent } from './_pages/menu-principal/menu-principal.component';
 import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
@@ -31,7 +31,8 @@ import { EventosUsuariosComponent } from './_pages/eventos/eventos-usuarios/even
 import { DialogoDescripcionEventoComponent } from './_pages/eventos/dialogo-descripcion-evento/dialogo-descripcion-evento.component';
 import { DialogoHorariosEventoComponent } from './_pages/eventos/dialogo-horarios-evento/dialogo-horarios-evento.component';
 import { NotificacionesComponent } from './_pages/notificaciones/notificaciones.component';
-import { EventosRegistradosComponent } from './_pages/notificaciones/eventos-registrados/eventos-registrados.component';
+import { EventosRegistradosComponent } from './_pages/eventos/eventos-registrados/eventos-registrados.component';
+import { PeticionesComponent } from './_pages/peticiones/peticiones.component';
 
 export const GRI_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -72,7 +73,8 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
     DialogoDescripcionEventoComponent,
     DialogoHorariosEventoComponent,
     NotificacionesComponent,
-    EventosRegistradosComponent  
+    EventosRegistradosComponent,
+    PeticionesComponent  
   ],
   entryComponents: [
     DialogoEdicionClaveComponent,

@@ -1,5 +1,5 @@
-import { Eventos } from './../../_model/Eventos';
-import { EventosService } from './../../_services/eventos.service';
+import { Eventos } from '../../../_model/Eventos';
+import { EventosService } from '../../../_services/eventos.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';

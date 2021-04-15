@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatSnackBar, MatSort, MatTableDataSource } from '@angular/material';
 import { Eventos } from 'src/app/_model/Eventos';
 import { EventosService } from 'src/app/_services/eventos.service';
-import { DialogoDescripcionEventoComponent } from '../../eventos/dialogo-descripcion-evento/dialogo-descripcion-evento.component';
-import { DialogoHorariosEventoComponent } from '../../eventos/dialogo-horarios-evento/dialogo-horarios-evento.component';
+import { DialogoDescripcionEventoComponent } from '../dialogo-descripcion-evento/dialogo-descripcion-evento.component';
+import { DialogoHorariosEventoComponent } from '../dialogo-horarios-evento/dialogo-horarios-evento.component';
 
 @Component({
   selector: 'app-eventos-registrados',

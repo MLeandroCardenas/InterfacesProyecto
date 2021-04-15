@@ -7,7 +7,6 @@ import { Zonas } from './../../_model/Zonas';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Eventos } from 'src/app/_model/Eventos';
-import { forkJoin } from 'rxjs';
 
 export interface categorias {
   valor: string;

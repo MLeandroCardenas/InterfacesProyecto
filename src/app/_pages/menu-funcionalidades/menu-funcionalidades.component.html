@@ -49,12 +49,13 @@
         <mat-divider></mat-divider>
       </div>
 
-      <!--Todos los roles-->
-      <button mat-menu-item style="cursor: pointer" routerLink="" (click)="sidenav.opened = false">
-        <mat-icon>post_add</mat-icon>
-        <span>Peticiones</span>
-      </button>
-      <mat-divider></mat-divider>
+      <div *ngIf="rolUsuario !== 'Administrador'">
+        <button mat-menu-item style="cursor: pointer" routerLink="./peticiones" (click)="sidenav.opened = false">
+          <mat-icon>post_add</mat-icon>
+          <span>Peticiones</span>
+        </button>
+        <mat-divider></mat-divider>
+      </div>
 
       <div *ngIf="rolUsuario !== 'Administrador' && rolUsuario !== 'Estudiante'">
         <!--docentes, administrativos-->
