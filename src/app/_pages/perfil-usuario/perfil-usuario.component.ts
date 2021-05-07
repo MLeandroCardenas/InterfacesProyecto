@@ -29,9 +29,9 @@ export class PerfilUsuarioComponent implements OnInit {
   cargarInformacion() {
     this.route.data.subscribe((datos: { datosUsuario: PerfilUsuario }) => {
       this.usuario = datos.datosUsuario;
-      if(this.usuario.foto === null)
-        this.myImg = './assets/img/img_defecto.gif'; 
-      else{
+      if(this.usuario.foto === null){       
+        this.myImg = './assets/img/img_defecto.gif';
+      } else{
         this.servicioUsuario.obtenerFotoUsuario(this.usuario.foto).subscribe(data => {
           this.myImg = data;
         });

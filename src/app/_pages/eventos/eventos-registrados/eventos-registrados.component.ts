@@ -22,6 +22,9 @@ export class EventosRegistradosComponent implements OnInit {
               private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.servicio.refrescarTabla.subscribe(data =>{
+      this.cargarInfo(data);
+    });
     this.cargarInfo(this.cantidad);
   }
 

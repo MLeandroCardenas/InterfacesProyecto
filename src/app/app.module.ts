@@ -11,8 +11,6 @@ import { RegistroComponent } from './_pages/registro/registro.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { EventosPublicosComponent } from './_pages/eventos/eventos-publicos/eventos-publicos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MenuPrincipalComponent } from './_pages/menu-principal/menu-principal.component';
-import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
 import { ValidacionCorreoAsincronaDirective } from './_validaciones/validacion-correo-asincrona.directive';
 import { Not404Component } from './_pages/not404/not404.component';
 import { ZonasComponent } from './_pages/zonas/zonas.component';
@@ -33,6 +31,8 @@ import { DialogoHorariosEventoComponent } from './_pages/eventos/dialogo-horario
 import { NotificacionesComponent } from './_pages/notificaciones/notificaciones.component';
 import { EventosRegistradosComponent } from './_pages/eventos/eventos-registrados/eventos-registrados.component';
 import { PeticionesComponent } from './_pages/peticiones/peticiones.component';
+import { NotificacionesUsuariosComponent } from './_pages/notificaciones/notificaciones-usuarios/notificaciones-usuarios.component';
+import { MenuComponent } from './_pages/menu/menu.component';
 
 export const GRI_DATE_FORMATS: MatDateFormats = {
   parse: {
@@ -55,8 +55,6 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
     LoginComponent,
     EventosPublicosComponent,
     ReestablecerCuentaComponent,
-    MenuPrincipalComponent,
-    MenuFuncionalidadesComponent,
     ValidacionCorreoAsincronaDirective,
     Not404Component,
     ZonasComponent,
@@ -74,7 +72,9 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
     DialogoHorariosEventoComponent,
     NotificacionesComponent,
     EventosRegistradosComponent,
-    PeticionesComponent  
+    PeticionesComponent,
+    NotificacionesUsuariosComponent,
+    MenuComponent
   ],
   entryComponents: [
     DialogoEdicionClaveComponent,

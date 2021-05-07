@@ -4,7 +4,6 @@ import { PerfilResolverGuard } from './_resolvers/perfil-resolver.guard';
 import { PerfilUsuarioComponent } from './_pages/perfil-usuario/perfil-usuario.component';
 import { Not404Component } from './_pages/not404/not404.component';
 import { CanActivateGuard } from './_guardas/can-activate.guard';
-import { MenuFuncionalidadesComponent } from './_pages/menu-funcionalidades/menu-funcionalidades.component';
 import { EventosPublicosComponent } from './_pages/eventos/eventos-publicos/eventos-publicos.component';
 import { RegistroComponent } from './_pages/registro/registro.component';
 import { LoginComponent } from './_pages/login/login.component';
@@ -17,24 +16,22 @@ import { UsuariosComponent } from './_pages/usuarios/usuarios.component';
 import { ZonasComponent } from './_pages/zonas/zonas.component';
 import { NotificacionesComponent } from './_pages/notificaciones/notificaciones.component';
 import { PeticionesComponent } from './_pages/peticiones/peticiones.component';
+import { MenuComponent } from './_pages/menu/menu.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'auth/login', pathMatch: 'full'},
-  {path: 'auth/login', component: LoginComponent},
-  {path: 'auth/registro', component: RegistroComponent},
-  {path: 'auth/confirmacion/:usuario', component: ConfirmacionRegistroComponent},
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: 'registro', component: RegistroComponent},
+  {path: 'confirmacion/:usuario', component: ConfirmacionRegistroComponent},
   {path: 'publicos', component: EventosPublicosComponent},
-  {path: 'auth/reestablecer/:token', component: ReestablecerCuentaComponent},
-  {path: 'funcionalidad', component: MenuFuncionalidadesComponent, canActivate: [CanActivateGuard], canActivateChild: [CanActivateGuard],
-  children: [
-    {path: 'lectores', component: LectoresComponent, resolve: {datosLectores: ZonasResolverGuard}},
-    {path: 'zonas', component: ZonasComponent},
-    {path: 'miperfil', component: PerfilUsuarioComponent, resolve: {datosUsuario: PerfilResolverGuard}},
-    {path: 'usuarios', component: UsuariosComponent},
-    {path: 'eventos', component: EventosComponent},
-    {path: 'notificaciones', component: NotificacionesComponent},
-    {path: 'peticiones', component: PeticionesComponent}
-  ]},
+  {path: 'reestablecer/:token', component: ReestablecerCuentaComponent},
+  {path: 'admin/lectores', component: LectoresComponent, canActivate: [CanActivateGuard], resolve: {datosLectores: ZonasResolverGuard}},
+  {path: 'admin/zonas', component: ZonasComponent, canActivate: [CanActivateGuard]},
+  {path: 'miperfil', component: PerfilUsuarioComponent, canActivate: [CanActivateGuard], resolve: {datosUsuario: PerfilResolverGuard}},
+  {path: 'admin/usuarios', component: UsuariosComponent, canActivate: [CanActivateGuard]},
+  {path: 'eventos', component: EventosComponent, canActivate: [CanActivateGuard]},
+  {path: 'notificaciones', component: NotificacionesComponent, canActivate: [CanActivateGuard]},
+  {path: 'peticiones', component: PeticionesComponent, canActivate: [CanActivateGuard]},
   {path: 'not404', component: Not404Component},
   {path: '**', redirectTo: 'not404', pathMatch: 'full'}
 ];

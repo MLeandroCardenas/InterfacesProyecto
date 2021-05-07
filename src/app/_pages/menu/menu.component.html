@@ -1,0 +1,37 @@
+<header>
+    <section>
+        <a id="logo">
+          <img src="assets/img/logotipo.png" alt="logotipo" width="350" height="90">
+        </a>
+      <label for="toggle-1" class="toggle-menu"><ul><li></li> <li></li> <li></li></ul></label>
+      <input type="checkbox" id="toggle-1">
+      <nav>
+        <ul>  
+            <div *ngIf="usuarioLogueado === null">
+              <li><a routerLink="login"><mat-icon>login</mat-icon>Login</a></li>
+              <li><a routerLink="registro"> <mat-icon>account_box</mat-icon>Registro</a></li>
+              <li><a routerLink="publicos"> <mat-icon>event</mat-icon>Eventos</a></li>
+            </div> 
+  
+          <div *ngIf="usuarioLogueado !== null">
+            <li><a (click)="cerrarSesion()"><mat-icon>exit_to_app</mat-icon>Salir</a></li>
+            <li><a routerLink="miperfil"><mat-icon>account_box</mat-icon>Mi perfil</a></li>
+          </div>
+  
+          <div *ngIf="usuarioLogueado !== 1 && usuarioLogueado !== null">
+            <li><a routerLink=""><mat-icon>assessment</mat-icon>Mi trazabilidad</a></li>
+            <li><a routerLink="peticiones"><mat-icon>post_add</mat-icon>Peticiones</a></li>
+            <li><a routerLink="eventos"><mat-icon>calendar_today</mat-icon>Eventos</a></li>
+          </div>
+  
+          <div *ngIf="usuarioLogueado === 1">
+            <li><a routerLink="notificaciones"><mat-icon>notifications</mat-icon>Notificaciones</a></li>
+            <li><a routerLink="admin/lectores"><mat-icon>build</mat-icon>Lectores</a></li>
+            <li><a routerLink=""><mat-icon>assessment</mat-icon>Trazabilidades</a></li>
+            <li><a routerLink="admin/usuarios"><mat-icon>supervised_user_circle</mat-icon>Usuarios</a></li>
+          </div> 
+        </ul>
+      </nav>
+    </section>
+</header>
+<router-outlet></router-outlet> 

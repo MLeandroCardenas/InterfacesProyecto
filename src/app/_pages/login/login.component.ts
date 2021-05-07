@@ -14,9 +14,6 @@ import { DialogoSolicitudRecuperacionComponent } from '../reestablecer-cuenta/di
 
 export class LoginComponent implements OnInit {
 
-  /**
-   * se inyecta el servicio en el constructor y ahora se pueden llamar los metodos
-   */
   constructor(private servicio: AutenticacionService,
               private mensaje: MatSnackBar,
               private dialog: MatDialog) { }
@@ -63,7 +60,10 @@ export class LoginComponent implements OnInit {
     let email = this.formLogin.get('correo').value;
     let password = this.formLogin.get('clave').value;
     this.servicio.loginToken(email, password).subscribe(data => {
-      this.servicio.guardarAuth(data);
+      this.servicio.iniciarSesion(data);
+      this.servicio.obtenerRol().subscribe(data=>{
+        this.servicio.rolAutenticado = data;
+      });
     });
   }
 

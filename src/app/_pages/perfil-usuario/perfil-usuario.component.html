@@ -1,25 +1,27 @@
-<div class="foto-opciones">
-    <form>
-        <img [src]="myImg" width="90" height="90" alt="foto">
+<mat-card>
+    <div class="foto-opciones">
+        <form>
+            <img [src]="myImg" width="90" height="90" alt="foto">
+            <br>
+            &nbsp;
+            <input type="file" name="fotoPerfil" accept="image/jpg,jpeg"(change)="capturarFoto($event)"/>
+            <br> <br>
+        </form>
+    </div>
+    <div class="contenedor">
+        <mat-card>Datos personales</mat-card>
         <br>
-        &nbsp;
-        <input type="file" name="fotoPerfil" accept="image/jpg,jpeg"(change)="capturarFoto($event)"/>
-        <br>
-    </form>
-</div>
-<div class="contenedor">
-    <mat-card>Datos personales</mat-card>
-    <br>
-    <label>Apellidos: <span>{{usuario.apellidos}}</span> </label>
-    <br><br>
-    <label>Nombres: <span>{{usuario.nombres}}</span> </label>
-    <br><br>
-    <label>Cargo: <span>{{usuario.rol}}</span> </label>
-    <br><br>
-    <label>Identificacion: <span>{{usuario.identificacion}}</span> </label>
-    <br><br>
-    <button mat-button style="float: none; background-color: green;" (click)="dialogoRecuperacion()">
-        <span>Cambiar contraseña</span>
-        <mat-icon>edit</mat-icon>
-    </button>
-</div>
+        <label>Apellidos: <span>{{usuario.apellidos}}</span> </label>
+        <br><br>
+        <label>Nombres: <span>{{usuario.nombres}}</span> </label>
+        <br><br>
+        <label>Cargo: <span>{{usuario.rol}}</span> </label>
+        <br><br>
+        <label>Identificacion: <span>{{usuario.identificacion}}</span> </label>
+        <br><br>
+        <button mat-button style="float: none; background-color: green;" (click)="dialogoRecuperacion()">
+            <span>Cambiar contraseña</span>
+            <mat-icon>edit</mat-icon>
+        </button>
+    </div>
+</mat-card>

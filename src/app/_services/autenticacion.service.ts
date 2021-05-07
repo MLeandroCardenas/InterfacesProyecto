@@ -5,8 +5,8 @@ import { Autenticacion } from './../_model/Autenticacion';
 import { Usuario } from './../_model/Usuario';
 import { HttpClient } from '@angular/common/http';
 import { environment } from './../../environments/environment';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable, EventEmitter, wtfStartTimeRange } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { RecuperacionCuenta } from '../_model/RecuperacionCuenta';
 
 @Injectable({
@@ -17,24 +17,33 @@ export class AutenticacionService {
   url: string = `${environment.HOST}v1`;
   urlAutenticacion: string = environment.AUTH;
   private readonly claveToken = 'autenticado';
-  private readonly claveNuevoToken = 'nuevo';
+  rolAutenticado: number = null;
 
-  constructor(private http: HttpClient, private route: Router) { }
+  constructor(private http: HttpClient, private route: Router) {
+  }
 
-  guardarAuth(data: any) {
+  obtenerRol(){
+    return this.http.get<number>(`${this.url}/rol`);
+  }
+
+  iniciarSesion(data: any) {
     sessionStorage.setItem(this.claveToken, data.access_token);
-   // sessionStorage.setItem(this.claveNuevoToken, data.refresh_token);
-    this.route.navigate(['/funcionalidad/miperfil']);
+    this.route.navigate(['miperfil']);
+  }
+
+  cerrarSesion() {
+    sessionStorage.removeItem(this.claveToken);
+    this.deshabilitarToken();
+    this.rolAutenticado = null;
+    this.route.navigate(['login']);
   }
 
   actualizarCredenciales(data: any) {
     sessionStorage.setItem(this.claveToken, data.access_token);
-    sessionStorage.setItem(this.claveNuevoToken, data.refresh_token);
   }
 
   guardarNuevoToken(data: any) {
     sessionStorage.setItem(this.claveToken, data.access_token);
-    sessionStorage.setItem(this.claveNuevoToken, data.refresh_token);
     return data;
   }
 
@@ -43,7 +52,7 @@ export class AutenticacionService {
   }
 
   ObtenerRefreshToken() {
-     return sessionStorage.getItem(this.claveNuevoToken);
+     //return sessionStorage.getItem(this.claveNuevoToken);
   }
 
   loginToken(username: string, password: string): Observable<any> {
@@ -66,19 +75,13 @@ export class AutenticacionService {
   }
 
   usuarioAutenticado() {
-    return this.http.get<PerfilUsuario>(`${this.url}/autenticado`);
+    return this.http.get<PerfilUsuario>(`${this.url}/perfil`);
   }
 
   deshabilitarToken() {
     return this.http.get<any>(`${this.url}/logout`);
   }
 
-  cerrarSesion() {
-    sessionStorage.removeItem(this.claveToken);
-    sessionStorage.removeItem(this.claveNuevoToken);
-    this.deshabilitarToken();
-    this.route.navigate(['auth/login']);
-  }
 
   registroUsuarios(usuarios: Usuario) {
     return this.http.post(`${this.url}/registro`, usuarios);

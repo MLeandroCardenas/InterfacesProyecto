@@ -1,2 +1,11 @@
-<app-eventos-registrados></app-eventos-registrados>
+<div class="formulario">
+    <mat-tab-group (selectedTabChange)="seleccion($event)">
+        <mat-tab label="Eventos">
+            <app-eventos-registrados></app-eventos-registrados>
+        </mat-tab>
+        <mat-tab label="Solicitudes">
+            <app-notificaciones-usuarios></app-notificaciones-usuarios>
+        </mat-tab>
+    </mat-tab-group>    
+</div>
 

@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { Lectores } from './../../_model/Lectores';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatTabChangeEvent } from '@angular/material';
 
 @Component({
   selector: 'app-lectores',
@@ -47,6 +48,13 @@ export class LectoresComponent implements OnInit {
     this.servicio.eventoZona.subscribe(() => {
       this.listarLectores();
     });
+  }
+
+  cambiarZonas(tabChangeEvent: MatTabChangeEvent): void{
+    if(tabChangeEvent.index === 1)
+      this.servicio.eventoLector.emit();
+    if(tabChangeEvent.index === 0)
+      this.servicio.eventoZona.emit();
   }
 
   redirectZonas() {

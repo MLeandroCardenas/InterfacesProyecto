@@ -1,4 +1,10 @@
 
+.formulario {
+  text-align: left;
+  margin-top: 1px;
+  margin-left: 50px;
+}
+
 .example-container {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,6 @@
-import { environment } from './../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
+import { MatTabChangeEvent } from '@angular/material';
+import { EventosService } from 'src/app/_services/eventos.service';
 
 @Component({
   selector: 'app-notificaciones',
@@ -8,12 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotificacionesComponent implements OnInit {
 
-  constructor() { }
-
-  rolActual: string;
+  constructor(private servicio: EventosService) { }
 
   ngOnInit() {
-    this.rolActual = environment.ROL; 
   }
 
+  seleccion(tabChangeEvent: MatTabChangeEvent): void{
+    if(tabChangeEvent.index === 0)
+      this.servicio.refrescarTabla.next(5);
+  }
 }

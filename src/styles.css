@@ -1,13 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.alert-danger{
-    color: #721c24;
-    background: #f8d7da;
-    border-color: #f5c6cb;
-    margin-bottom: 5px;
-}
-.container-error-message{
-    padding: 3px; 
-}
+body{margin:0px; padding:0px; font-family: 'Open Sans', sans-serif; background-color: rgb(243, 233, 233);}
+*{text-decoration:none; list-style:none; margin:0px; padding:0px; outline:none;}
+.alert-danger{color: #721c24;background: #f8d7da;border-color: #f5c6cb;margin-bottom: 5px;}
+.container-error-message{padding: 3px; }

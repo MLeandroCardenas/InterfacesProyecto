@@ -35,8 +35,8 @@ export class AuthInterceptorService implements HttpInterceptor {
     })).pipe(catchError((err) => {
       if (err.status === 401) {
         let url = this.route.url;
-        if (url === '/auth/login') {
-          this.snackBar.open(err.error, 'Advertencia', { duration: 3000 });
+        if (url === '/login') {
+          this.snackBar.open('No esta autorizado para acceder a este recurso', 'Advertencia', { duration: 3000 });
         } else {
           this.servicio.cerrarSesion();
           this.snackBar.open('Su token ha expirado inicie sesion nuevamente', 'Advertencia', { duration: 3000 });
@@ -44,9 +44,7 @@ export class AuthInterceptorService implements HttpInterceptor {
       } else if (err.status === 400) {
         this.snackBar.open(err.error, 'Advertencia', { duration: 3000 });
       } else if (err.status === 404) {
-        this.snackBar.open(err.error, 'Advertencia', { duration: 3000 });
-      } else if (err.status === 422) {
-        this.snackBar.open(err.error, 'Advertencia', { duration: 3000 });
+        this.snackBar.open('Recurso no encontrado', 'Advertencia', { duration: 3000 });
       } else if (err.status === 500) {
         this.snackBar.open('Ha ocurrido un error inesperado estamos trabajando en ello :(', 'ERROR', { duration: 3000 });
       }
