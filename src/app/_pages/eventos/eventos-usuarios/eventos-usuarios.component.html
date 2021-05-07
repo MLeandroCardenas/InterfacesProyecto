@@ -7,12 +7,12 @@
         
         <ng-container matColumnDef="Evento">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.nombre_evento}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.nombre_evento | uppercase}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="Lugar">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Zona </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{element.nombre_zona}} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{element.nombre_zona | uppercase}} </mat-cell>
         </ng-container>
     
         <ng-container matColumnDef="Visibilidad">
@@ -29,34 +29,44 @@
             <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
 
             <mat-cell *matCellDef="let row">
-                <button mat-button (click)="descripcionEvento(row.descripcion)" matTooltip="Ver descripcion">
+                <button class="botonVerde" mat-button (click)="descripcionEvento(row.descripcion)" matTooltip="Ver descripcion">
                     <mat-icon>description</mat-icon>
                 </button>
 
-                <button mat-button (click)="horarioEvento(row.horario)" matTooltip="Ver Horarios">
+                &nbsp;
+
+                <button class="botonAzul" mat-button (click)="horarioEvento(row.horario)" matTooltip="Ver Horarios">
                     <mat-icon>access_time_filled</mat-icon>
                 </button>
 
+                &nbsp;
+
                 <div *ngIf="row.estado === 'CREADO'">
-                    <button mat-button matTooltip="Eliminar evento" (click)="eliminarEvento(row.id)">
+                    <button class="botonRojo" mat-button matTooltip="Eliminar evento" (click)="eliminarEvento(row.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>
 
+                &nbsp;
+
                 <div *ngIf="row.estado === 'CREADO'">
-                    <button mat-button matTooltip="editar evento">
+                    <button class="botonVerde" mat-button matTooltip="editar evento">
                         <mat-icon>edit</mat-icon>
                     </button>
                 </div>
 
+                &nbsp;
+
                 <div *ngIf="row.estado === 'CREADO'">
-                    <button mat-button matTooltip="Enviar a revisión" (click)="solicitarAprobacion(row.id)">
+                    <button class="botonRojo" mat-button matTooltip="Enviar a revisión" (click)="solicitarAprobacion(row.id)">
                         <mat-icon>send</mat-icon>
                     </button>
                 </div>
 
+                &nbsp;
+
                 <div *ngIf="row.estado === 'HABILITADO'">
-                    <button mat-button matTooltip="Enviar invitaciones">
+                    <button class="botonVerde" mat-button matTooltip="Enviar invitaciones">
                         <mat-icon>insert_invitation</mat-icon>
                     </button>
                 </div>
